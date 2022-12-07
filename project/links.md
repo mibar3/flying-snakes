@@ -6,7 +6,7 @@ https://www.jetbrains.com/help/pycharm/postgresql.html
 ## Django Project setup in Pycharm
 https://www.youtube.com/watch?v=krrzQbxgLOE
 
-For me, creating the virtual environment is not working like in this video so here is how I done.
+For me, creating the virtual environment is not working like in this video so here is how I done. Hope this help!
 1. Create a project using the new environment setup with the \venv in the end of the virtual environemt project name.
 2. Go to File-> New Projects setup-> Preference fro new project-> Python intrepreter-> then choose Python 3.9(venv)
 3. After that add packages under that python version. 
