@@ -13,6 +13,11 @@ For me, creating the virtual environment is not working like in this video so he
 4. Packages to add:1. pip 2. django 3. sqlparse
 5. Then click apply so that it will be available for that project and in the terminal you will see (venv).
 
+In terminal:
+1. pip install django
+2. django-admin startproject [project_file_name] (after this command, you will see a file under the project file which include 6/7 python files)
+3. 
+
 https://stackoverflow.com/questions/53267642/create-new-local-server-in-pgadmin
 
 Note: Please Use PgAdmin4 for visualization of database
