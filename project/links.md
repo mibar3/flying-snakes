@@ -3,6 +3,10 @@
 ## Database Installation 
 https://www.jetbrains.com/help/pycharm/postgresql.html
 
+https://stackoverflow.com/questions/53267642/create-new-local-server-in-pgadmin
+
+Note: Please Use PgAdmin4 for visualization of database
+
 ## Django Project setup in Pycharm
 https://www.youtube.com/watch?v=krrzQbxgLOE
 
@@ -16,11 +20,8 @@ For me, creating the virtual environment is not working like in this video so he
 In terminal:
 1. pip install django
 2. django-admin startproject [project_file_name] (after this command, you will see a file under the project file which include 6/7 python files)
-3. 
-
-https://stackoverflow.com/questions/53267642/create-new-local-server-in-pgadmin
-
-Note: Please Use PgAdmin4 for visualization of database
+3. cd project_file_name
+4. python manage.py runserver
 
 ## Input Data
 
