@@ -23,6 +23,10 @@ In terminal:
 3. cd project_file_name
 4. python manage.py runserver
 
+## Postgres steup with Django
+https://www.geeksforgeeks.org/how-to-use-postgresql-database-in-django/
+
+
 ## Input Data
 
 ## Login,Logout
