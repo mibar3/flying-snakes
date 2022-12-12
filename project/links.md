@@ -29,6 +29,8 @@ https://www.geeksforgeeks.org/how-to-use-postgresql-database-in-django/
 ## For starting the simple project
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website
 
+https://www.youtube.com/watch?v=4XYsODaQ6Ok
+
 ## Input Data
 
 ## Login,Logout
