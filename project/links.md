@@ -35,6 +35,7 @@ https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local
 
 ## Display Seats
 - https://code-boxx.com/seat-reservation-javascript/
+- https://www.youtube.com/watch?v=25AiXy8e09E (to get an idea of how the html code works)
 
 ## Reserve/Cancel Seats
 
