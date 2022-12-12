@@ -34,10 +34,14 @@ https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local
 ## Login,Logout
 
 ## Display Seats
+- https://gist.github.com/aleckyann/98802940060703b9fd99b40e84c2753e (html code for bus seat booking)
+- https://sachinkurkute.github.io/movie-seat-layout/src/index.html (interactive! bit javascript)
 - https://code-boxx.com/seat-reservation-javascript/
 - https://www.youtube.com/watch?v=25AiXy8e09E (to get an idea of how the html code works)
+- https://stackoverflow.com/questions/40011399/how-to-layout-something-like-seats-in-cinema-hall (inspo)
 
 ## Reserve/Cancel Seats
+- https://www.tutorialspoint.com/program-to-implement-seat-reservation-manager-in-python
 - https://www.youtube.com/watch?v=ahobllKXEEY (python code)
 
 ## Statistics
