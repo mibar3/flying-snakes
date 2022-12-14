@@ -1,5 +1,7 @@
 # Links
 
+https://www.youtube.com/watch?v=4XYsODaQ6Ok (really good overview to refresh django and html :))
+
 ## Database Installation 
 https://www.jetbrains.com/help/pycharm/postgresql.html
 
