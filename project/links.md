@@ -1,6 +1,6 @@
 # Links
 
-https://www.youtube.com/watch?v=4XYsODaQ6Ok (really good overview to refresh django and html :))
+https://www.youtube.com/watch?v=4XYsODaQ6Ok (really good overview to refresh django and html :) from 12:37 onwards he shows how to add changes in the website)
 
 ## Database Installation 
 https://www.jetbrains.com/help/pycharm/postgresql.html
