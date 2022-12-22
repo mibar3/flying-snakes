@@ -15,7 +15,7 @@ try:
             postgres_insert_query = """ INSERT INTO airline_seat (a,b,c,d,e,f) VALUES (%s,%s,%s,%s,%s,%s)"""
             record_to_insert = (aa, bb, cc, dd, ee, ff)
             cursor.execute(postgres_insert_query, record_to_insert)
-            #print(aa, bb, cc, dd, ee, ff)
+            # print(aa, bb, cc, dd, ee, ff)
 
     connection.commit()
     count = cursor.rowcount
@@ -51,6 +51,5 @@ def deletion():
             connection.close()
             print("PostgreSQL connection is closed")
 
-
-#print("Before deletion")
-#deletion()
+# print("Before deletion")
+# deletion()
