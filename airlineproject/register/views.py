@@ -13,6 +13,7 @@ def dashboard_view(request):
 
 
 def register_view(request):
+    print("Miranda")
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -54,3 +55,6 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+def seats_view(request):
+    return render(request, 'registration/seats.html')
