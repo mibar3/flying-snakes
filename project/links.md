@@ -28,6 +28,9 @@ In terminal:
 ## Postgres steup with Django
 https://www.geeksforgeeks.org/how-to-use-postgresql-database-in-django/
 
+Postgresql helps us visualize the data we are creating/working on in SQL language. Here is where we create the table with the airline seats 
+https://www.datacamp.com/tutorial/tutorial-postgresql-python
+
 ## For starting the simple project
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website
 
@@ -38,6 +41,9 @@ https://www.youtube.com/watch?v=4XYsODaQ6Ok
 ## Login,Logout
 
 ## Display Seats
+This shows how to display a sql table from the database (in our case postgresql) onto a website using html
+- https://www.youtube.com/watch?v=PhxKV0ax6x8
+
 - https://gist.github.com/aleckyann/98802940060703b9fd99b40e84c2753e (html code for bus seat booking)
 - https://sachinkurkute.github.io/movie-seat-layout/src/index.html (interactive! bit javascript)
 - https://code-boxx.com/seat-reservation-javascript/
