@@ -28,6 +28,9 @@ In terminal:
 ## Postgres steup with Django
 https://www.geeksforgeeks.org/how-to-use-postgresql-database-in-django/
 
+Postgresql helps us visualize the data we are creating/working on in SQL language. Here is where we create the table with the airline seats 
+https://www.datacamp.com/tutorial/tutorial-postgresql-python
+
 ## For starting the simple project
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website
 
