@@ -58,3 +58,6 @@ def logout(request):
 
 def seats_view(request):
     return render(request, 'registration/seats.html')
+
+def confirmed_view(request):
+    return render(request, 'registration/confirmed.html')
