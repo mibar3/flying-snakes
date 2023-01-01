@@ -13,7 +13,6 @@ def dashboard_view(request):
 
 
 def register_view(request):
-    print("Miranda")
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -23,7 +22,7 @@ def register_view(request):
         con_password = request.POST['confirm_password']
         if password == con_password:
             if User.objects.filter(username=username).exists():
-                messages.info(request, 'username is already existed')
+                messages.info(request, 'username already exists')
                 return redirect('register')
             else:
                 user = User.objects.create_user(username=username, password=password, email=email,

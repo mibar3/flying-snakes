@@ -1,6 +1,5 @@
-<!--. Inspo from https://gist.github.com/aleckyann/98802940060703b9fd99b40e84c2753e -->.
+<!--. Inspo from https://gist.github.com/aleckyann/98802940060703b9fd99b40e84c2753e -->
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -43,14 +42,31 @@
 }
 
 .fuselage {
-  border-right: 5px solid #d8d8d8;
-  border-left: 5px solid #d8d8d8;
+  border-right: 10px solid #d8d8d8;
+  border-left: 10px solid #d8d8d8;
 }
 
 ol {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.rowNumber{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.rowNumber label {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 2.5rem;
+  background: none;
 }
 
 .seats {
@@ -198,7 +214,8 @@ ol {
     <!-- As a heading -->
 <nav class="navbar bg-dark navbar-dark">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">Navbar</span>
+    <a href= {% url 'login' %} class="navbar-brand mb-0 h1" type='button'>Home</a>
+    <!-- must change the link, if i change 'login' for 'index' it doesnt work -->
   </div>
 </nav>
     <h1 class="text-center text-success">Now you can select your seat(s)</h1>
@@ -210,11 +227,6 @@ ol {
       <div class="fuselage">
 
       </div>
-     <!-- <ol class="row number"> This is where I was trying to add the row numbers on the left side of each row
-          <ol class="row 1">
-            <input type="hidden" id="1"/>
-            <label for="1">1</label>
-          </ol> -->
       <ol class="cabin fuselage">
         <li class="row row--1">
           <ol class="seats" type="A">
@@ -227,7 +239,7 @@ ol {
               <label for="1B">B</label>
             </li>
             <li class="seat">
-              <input type="checkbox"    id="1C" />
+              <input type="checkbox" id="1C" />
               <label for="1C">C</label>
             </li>
             <li class="seat">
@@ -501,8 +513,10 @@ ol {
 
       </div>
     </div>
-    <a href= {% url 'confirmed' %} type='button' class='btn btn-primary'>Confirm</a>
-    <!-- This redirects to the confirmed page once we have confirmed the selected seats -->
+    <div class="d-grid gap-2 col-1 mx-auto"> <!--positions the "confirm" button in the center -->
+      <a href= {% url 'confirmed' %} type='button' class='btn btn-primary'>Confirm</a>
+      <!-- This redirects to the confirmed page once we have confirmed the selected seats -->
+    </div>
   </body>
 
   </html>

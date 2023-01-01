@@ -10,10 +10,11 @@
     <!-- As a heading -->
 <nav class="navbar bg-dark navbar-dark">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">Navbar</span>
+    <a href= {% url 'login' %} class="navbar-brand mb-0 h1" type='button'>Home</a>
+    <!-- must change the link, if i change 'login' for 'index' it doesnt work -->
   </div>
 </nav>
-    <h1 class="text-center text-success">Registration Form</h1>
+    <h1 class="text-center text-success">Registration form</h1>
     <div class="container-fluid">
         <form action="{%url 'register' %}" method="POST" class="row g-3">
             {% csrf_token %}
@@ -42,8 +43,8 @@
     <input name='confirm_password' type="password" class="form-control" id="inputPassword2">
   </div>
     </div>
-  <div class="col-14">
-    <button type="submit" class="btn btn-success btn-lg">register</button>
+  <div class="d-grid gap-2 col-1 mx-auto">
+    <button type="submit" class="btn btn-primary btn-lg">Register</button>
   </div>
 </form>
     </div>
