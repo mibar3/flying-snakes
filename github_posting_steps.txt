@@ -1,0 +1,7 @@
+In order to post the changes made on the repository on to github these are the following commands that must be used in the terminal.
+
+git add .  --> the . means that all is included, if we only wanted to add a specific folder or file we would replace the . with the name of the folder/file
+git commit -m "message"  --> this is the most important, any time new changes are being uploaded onto github a brief message must be included summarising the changes made
+git push
+*type in github username*
+*type in github token(special password)*
