@@ -31,6 +31,9 @@ In terminal:
 ## Postgres steup with Django
 https://www.geeksforgeeks.org/how-to-use-postgresql-database-in-django/
 
+## Logo Creator
+https://www.freelogodesign.org/
+
 ## Base.html File for the default setup (navbar,footer, container of the main text)
 https://www.youtube.com/watch?v=rjxpL89BEX4
 
