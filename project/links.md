@@ -31,6 +31,13 @@ In terminal:
 ## Postgres steup with Django
 https://www.geeksforgeeks.org/how-to-use-postgresql-database-in-django/
 
+## Base.html File for the default setup (navbar,footer, container of the main text)
+https://www.youtube.com/watch?v=rjxpL89BEX4
+
+## Fetch Data From a Database And Output To A Webpage (Using pythons classes and atributes)
+https://www.youtube.com/watch?v=H3joYTIRqKk
+
+
 Postgresql helps us visualize the data we are creating/working on in SQL language. Here is where we create the table with the airline seats 
 https://www.datacamp.com/tutorial/tutorial-postgresql-python
 
