@@ -3,7 +3,7 @@
 https://www.youtube.com/watch?v=4XYsODaQ6Ok (really good overview to refresh django and html :) from 12:37 onwards he shows how to add changes in the website)
 
 ## Important!
-When running the server, in order to view the seats which are retrieved from a .txt file you must first run the dashboard page. ONLY RUN THE DASHBOARD ONCE, IF YOU RUN IT MORE TIMES THE DATA WILL DUPLICATE EACH TIME
+When running the server, in order to view the seats which are retrieved from a .txt file you must first run the dashboard page. ONLY RUN THE DASHBOARD ONCE, IF YOU RUN IT MORE TIMES THE DATA WILL DUPLICATE EACH TIME. It is only to open the dashboard once, from then on eacht time you run the server the database will have loaded and the seats will show up.
 
 ## Database Installation 
 https://www.jetbrains.com/help/pycharm/postgresql.html
