@@ -27,6 +27,7 @@
     {% if request.user.is_authenticated %}
     <p class="text-success">You are Logged In</p>
     <p class="text-success">Email : {{request.user.email }} </p>
+#  there is a part missing here that redirects the user to the dashboard once the user has been authenticated
     <p class="text-danger h3">User is not logged in </p>
 
     {% endif %}

@@ -27,6 +27,12 @@ class AirlineSeat(models.Model):
         MIDDLE = '2', 'Middle seat'
         AISLE = '3', 'Aisle seat'
 
+    class SeatFlags(models.TextChoices):
+        RED = '1', 'TAKEN'
+        GREEN = '2', 'SELECTED'
+        GREY = '3', 'AVAILABLE'
+
+
     # Fields
     seat_number = models.CharField(max_length=20, help_text='Enter seat number')
     seat_class = models.CharField(
@@ -39,15 +45,14 @@ class AirlineSeat(models.Model):
         choices=SeatLocation.choices,
         default=SeatLocation.AISLE
     )
-    #seat_price = models.CharField(max_length=20, help_text="Enter price")
 
-    # (...)
-
-    # …
+    seat_flag = models.CharField(max_length=15,
+                                 choices=SeatFlags.choices,
+                                 default=SeatFlags.GREY)
 
     # Metadata
     class Meta:
-        ordering = ['-seat_number', 'seat_class']
+        ordering = ['-seat_number', 'seat_class', 'seat_location', 'seat_flag']
 
     # Methods
     def get_absolute_url(self):
