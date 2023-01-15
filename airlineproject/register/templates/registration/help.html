@@ -1,0 +1,43 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<!-- ***** Title Beginning ***** -->
+    <div class= "intro">
+        <h1 class="text-center"> <font color="green"> How can we help you? </h1>
+        <p class="text-center"> Click on the question to see the answer.</font></p>
+    </div>
+    <main>
+<!-- ***** Title Ending ***** -->
+<!-- ***** Questions Beginning ***** -->
+        <details style="background: #b7d5ac; border: 3px inset #6eaa5e; border-radius:5px;">
+            <summary style ="padding: 1rem; background:#578a49; color:#000; cursor: pointer;"><b>How can I log in?</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                <p>You can log in by clicking on the 'sign up'-button at the navbar.<br/>
+                To log in you have to provide your email address and your password. If you don't have a password yet,, please sign up first. You can find the button for signing up also at the Navbar.</p>
+        </div>
+        </details>
+        <p>
+
+        </p>
+        <details style="background: #b7d5ac; border: 3px inset #6eaa5e; border-radius:5px;">
+            <summary style ="padding: 1rem; background:#578a49; color:#000; cursor: pointer;"><b> What do I need to sign up</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                 <p>To sign up at our reservation system, we need your Email, a password and your Address.<br/>
+                     Now you can login everytime with your email and your password to choose your seat.</p>
+            </div>
+        </details>
+        <p>
+
+        </p>
+        <details style=" ackground: #b7d5ac; border: 3px inset #6eaa5e; border-radius:5px;" >
+            <summary style ="padding: 1rem; background:#578a49; color:#000; cursor: pointer;"><b> How does the reservation of my seat works?</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                <p>To choose and reserve your favorite seat on the plane you have to sign up or log in first.<br/>
+                    Afterwards you will be automatically transferred to the reservation tool. Here you can choose your seat. Seats with a X are already taken. Don't forget to confirm your choice</p>
+            </div>
+        </details>
+<!-- ***** Questions Ending ***** -->
+
+    </main>
+
+  {% endblock %}

@@ -138,3 +138,9 @@ def seat_view(request):
 
 def confirmed_view(request):
     return render(request, 'registration/confirmed.html')
+
+def base(request):
+    return render(request, 'registration/base.html')
+
+def help(request):
+    return render(request,'registration/help.html')
