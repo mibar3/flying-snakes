@@ -69,3 +69,9 @@ https://www.youtube.com/watch?v=rjxpL89BEX4
 
 ## Fetch Data From a Database And Output To A Webpage (Using pythons classes and atributes)
 https://www.youtube.com/watch?v=H3joYTIRqKk
+
+## Creating a branch
+https://www.youtube.com/watch?v=QV0kVNvkMxc
+
+## Merging changes in branches and commiting into the main branch
+https://www.youtube.com/watch?v=XX-Kct0PfFc
