@@ -26,7 +26,8 @@ for JS stuff for example a script src= ... file
             <a class="nav-link active" aria-current="page" href={% url "home" %}>Home</a>
             <a class="nav-link" href={% url "login" %}>Login</a>
             <a class="nav-link" href={% url "register" %}>Sign up</a>
-            <a class="nav-link" href={% url "login" %}>Logout</a
+            <a class="nav-link" href={% url "login" %}>Logout</a>
+            <a class="nav-link" href={% url "statistics" %}>Statistics</a> <!--must change: only superuser can see({% if user.is_superuser%})-->
              <!-- must change the link to logout here, logout page doesnt exist yet -->
           </ul>
           <ul class="navbar-nav mr-auto">

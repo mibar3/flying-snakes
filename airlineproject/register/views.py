@@ -5,6 +5,7 @@ import os
 
 # Create your views here.
 from .models import AirlineSeat
+from .models import Passenger
 
 
 def index_view(request):
@@ -144,3 +145,35 @@ def base(request):
 
 def help(request):
     return render(request,'registration/help.html')
+
+def statistics(request):
+    #Counting taken and available Seats
+    
+    #available_count = AirlineSeat.seat_flag.all()
+    #reserved_count = AirlineSeat.objects.SeatFlags(models.RED).count
+
+    #Percentage of taken and available Seats
+
+    #available_percentage = (available_count / 60) * 100
+    #reserved_percentage = (reserved_count / 60) * 100
+
+    #Listing taken and available Seats
+
+    #available_list = AirlineSeat.objects.SeatFlags(models.GREY)
+    #reserved_list = AirlineSeat.objects.SeatFlags(models.RED)
+
+    #Counting the Users
+
+    #user_count = Passenger.objects.all().count
+
+    #Listing User and their information
+
+    #user_list = Passenger.objects.all()
+
+    return render(request, 'registration/statistics.html',
+    {#'available_count': available_count,
+    #'reserved_count': reserved_count,
+    #'available_list': available_list,
+    #'reserved_list': reserved_list,
+    #'user_list': user_list
+    })

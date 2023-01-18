@@ -14,4 +14,5 @@ urlpatterns = [
     path('confirmed', views.confirmed_view, name='confirmed'),
     path('base', views.base, name='base'),
     path('help', views.help, name='help'),
+    path('statistics', views.statistics, name='statistics')
 ]
