@@ -23,6 +23,11 @@ git merge miranda-1
 10. Push the changes added into the main onto github:
 git push
 
+11. If you get in issue that says the remote repository has new changes that your local repository still doesnt have, it will suggest you do a pull command before pushing again. So just do:
+git pull
+git push
+And it should work :)
+
 
 ## Important!
 When running the server, in order to view the seats which are retrieved from a .txt file you must first run the dashboard page. ONLY RUN THE DASHBOARD ONCE, IF YOU RUN IT MORE TIMES THE DATA WILL DUPLICATE EACH TIME. It is only to open the dashboard once, from then on eacht time you run the server the database will have loaded and the seats will show up.
