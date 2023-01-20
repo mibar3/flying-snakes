@@ -8,32 +8,65 @@
     </div>
     <main>
 <!-- ***** Title Ending ***** -->
+        <br/>
 <!-- ***** Questions Beginning ***** -->
-        <details style="background: #b7d5ac; border: 3px inset #6eaa5e; border-radius:5px;">
-            <summary style ="padding: 1rem; background:#578a49; color:#000; cursor: pointer;"><b>How can I log in?</b></summary>
+        <details style="background: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;">
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b>How can I log in?</b></summary>
             <div style="padding:1rem 1rem 1px 1rem">
-                <p>You can log in by clicking on the 'sign up'-button at the navbar.<br/>
-                To log in you have to provide your email address and your password. If you don't have a password yet,, please sign up first. You can find the button for signing up also at the Navbar.</p>
+                <p>You can log in by clicking on the 'login'-button at the top or click <a href={% url "login" %}>here</a>.<br/>
+                To log in you have to provide your email address and your password. If you don't have a password yet, please sign up first. You can find the button for signing up also at the top or click <a href={% url "register" %}>here</a></p>
         </div>
         </details>
         <p>
 
         </p>
-        <details style="background: #b7d5ac; border: 3px inset #6eaa5e; border-radius:5px;">
-            <summary style ="padding: 1rem; background:#578a49; color:#000; cursor: pointer;"><b> What do I need to sign up</b></summary>
+        <details style="background: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;">
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b> What do I need to sign up?</b></summary>
             <div style="padding:1rem 1rem 1px 1rem">
-                 <p>To sign up at our reservation system, we need your Email, a password and your Address.<br/>
-                     Now you can login everytime with your email and your password to choose your seat.</p>
+                 <p>To sign up at our reservation system, we just need you name and you email-Adress. Besides this we need you to create your username and a password<br/>
+                     After you are registered you only need to login with your email and your password to choose your seat.
+                     You can find the form to register at the top under 'sign up' or click <a href={% url "register" %}>here</a>
+                 </p>
             </div>
         </details>
         <p>
 
         </p>
-        <details style=" ackground: #b7d5ac; border: 3px inset #6eaa5e; border-radius:5px;" >
-            <summary style ="padding: 1rem; background:#578a49; color:#000; cursor: pointer;"><b> How does the reservation of my seat works?</b></summary>
+        <details style=" ackground: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;" >
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b> How does the reservation of my seat works?</b></summary>
             <div style="padding:1rem 1rem 1px 1rem">
                 <p>To choose and reserve your favorite seat on the plane you have to sign up or log in first.<br/>
-                    Afterwards you will be automatically transferred to the reservation tool. Here you can choose your seat. Seats with a X are already taken. Don't forget to confirm your choice</p>
+                    Afterwards you will be automatically transferred to the reservation tool. Here you can choose your seat. Your selected Seat is marked in a different color. Seats with a X are already taken. Don't forget to confirm your choice at the end with the confirm button.</p>
+            </div>
+        </details>
+        <p>
+
+        </p>
+        <details style=" ackground: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;" >
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b> What happens after I confirmed my seats?</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                <p>As soon as you confirmed your Seat choice, you will be transferred to the confirmed page. Like this you know, that your reservation worked. <br/>
+                Please check now your Email, to get a copy of the reservation.</p>
+            </div>
+        </details>
+        <p>
+
+        </p>
+        <details style=" ackground: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;" >
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b> I don't like my seats. How can I change them?</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                <p>If you are unhappy with your seat choice, just send us an <a href="mailto:flyingsnakesairline@service.com">Email</a> and tell us why you want another seat. We can cancel your reservation for you. <br/>
+                After we canceled your reservation, you need to make a new reservation. For that login and choose your new seat(s). Don't forget to confirm at the end.</p>
+            </div>
+        </details>
+         <p>
+
+        </p>
+        <details style=" ackground: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;" >
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b>How can I cancel my seats?</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                <p>To cancel your seats, please send us an <a href="mailto:flyingsnakesairline@service.com">Email</a>. We are going to cancel your reservation for you. <br/>
+                </p>
             </div>
         </details>
 <!-- ***** Questions Ending ***** -->
