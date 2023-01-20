@@ -16,6 +16,10 @@ for JS stuff for example a script src= ... file
   <body>
   <!-- ***** Navbar Area Beginning ***** -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark navbar-dark">
+      <a class="navbar-brand" href="#" style="padding-left: 30px">
+        {%load static%}
+        <img src="{% static 'images/logo.png' %}" alt="flyingsnakes Logo" width="60" height="60">
+      </a>
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -27,7 +31,7 @@ for JS stuff for example a script src= ... file
             <a class="nav-link" href={% url "login" %}>Login</a>
             <a class="nav-link" href={% url "register" %}>Sign up</a>
             <a class="nav-link" href={% url "login" %}>Logout</a>
-            <a class="nav-link" href={% url "statistics" %}>Statistics</a> <!--must change: only superuser can see({% if user.is_superuser%})-->
+            <a class="nav-link" href={% url "statistics" %}>Statistics</a> <!--must change: only superuser can see-->
              <!-- must change the link to logout here, logout page doesnt exist yet -->
           </ul>
           <ul class="navbar-nav mr-auto">
