@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 import os
+from django.core.mail import send_mail
 
 # Create your views here.
 from .models import AirlineSeat
@@ -134,10 +135,30 @@ def dashboard_view(request):
 
 def seat_view(request):
     seat_list = AirlineSeat.objects.all()
+
+    if request.method == "POST":
+        display_type = request.POST.get("display_type", None)
+        if display_type in ["selected_seat"]:
+            print('The name that was typed in is:')
+            print(request.POST)
+            # Handle whichever was selected here
+
     return render(request, 'registration/seat_view.html', {'seat_list': seat_list})
 
 
 def confirmed_view(request):
+    # send a seat confirmation email)
+    # the variables used come from the registration function
+    # have to figure out how to import the variables from registration function
+
+    # https://www.youtube.com/watch?v=xNqnHmXIuzU
+    '''send_mail(
+        'Account confirmation' + first_name + last_name,  # subject
+        'Thank you for signing up to our airline reservation system!',  # message
+        [miri.cbe @ gmail.com],  # from email
+        email,  # To Email
+    ) '''
+
     return render(request, 'registration/confirmed.html')
 
 def base(request):
@@ -146,9 +167,23 @@ def base(request):
 def help(request):
     return render(request,'registration/help.html')
 
+def seat_test(request):
+    seat_list = AirlineSeat.objects.all()
+    return render(request, 'registration/seat_test.html', {'seat_list': seat_list})
+
+
+''' This is the code is used from https://www.geeksforgeeks.org/render-html-forms-get-post-in-django/ 
+    to test the get post in html'''
+def your_template(request):
+    # logic of view will be implemented here
+    print('The name that was typed in is:')
+    print(request.POST)
+    return render(request, 'registration/your_template.html')
+
+
 def statistics(request):
     #Counting taken and available Seats
-    
+
     #available_count = AirlineSeat.seat_flag.all()
     #reserved_count = AirlineSeat.objects.SeatFlags(models.RED).count
 
