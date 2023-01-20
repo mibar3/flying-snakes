@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seat test</title>
+</head>
+<body>
+ {% for seat in seat_list %}
+    {{seat.seat_number}}
+  {% endfor %}
+</body>
+</html>
+
 {% extends 'registration/base.html' %}
 
 {% block content %}
@@ -85,41 +98,13 @@
       opacity: 0;
     }
 
-    /* aqui hacemos que se ponga la cruz cuando chequeas el asiento */
-
     .seat_number input[type=checkbox]:checked + label {
-      background: #dddddd;
-      text-indent: -9999px;
-      overflow: hidden;
+      background: #F42536;
+      -webkit-animation-name: rubberBand;
+      animation-name: rubberBand;
+      animation-duration: 300ms;
+      animation-fill-mode: both;
     }
-
-     .seat_number input[type=checkbox]:checked + label:after {
-      content: "X";
-      text-indent: 0;
-      position: absolute;
-      top: 4px;
-      left: 50%;
-      transform: translate(-50%, 0%);
-    }
-
-/* tengo que arreglar este porque este deberia determinar que paarezca el popover pero no me funciona uwu */
-    /*.seat_number input[type=checkbox]:checked label:after + div {
-      position: absolute;
-      display: block;
-      z-index: 1;
-      width: 350%;
-      border: solid 1px teal;
-      border-radius: 5%;
-      padding: 10px;
-      background: white;
-      left: calc(1rem + 100%);
-      bottom: 50%;
-      transform: translateY(50%);
-    } */
-
-
-    /* esto hay que mantenerlo para que la siguiente vez el asiento checked este disabled y la siguiente
-    persona no pueda clickearlo, pero checked + label y disabled + label tienen los mismos settings */
 
     .seat_number input[type=checkbox]:disabled + label {
       background: #dddddd;
@@ -247,9 +232,9 @@
       animation-name: rubberBand;
     }
 
-    /*/* popover*/
+    /* popover*/
 
-    input+div {
+    /* input+div {
       display:none;
     }
     input[type=checkbox]:hover+div {
@@ -265,8 +250,15 @@
       bottom: 50%;
       transform: translateY(50%);
      }
-     */
 
+      input[type=checkbox]:checked{
+      background: #F42536;
+      -webkit-animation-name: rubberBand;
+      animation-name: rubberBand;
+      animation-duration: 300ms;
+      animation-fill-mode: both;
+     }
+    */
 
     </style>
 <!-- ***** Style Ending ***** -->
@@ -285,16 +277,26 @@
         <li class="row row--1">
           <ol class="seats" type="A">
             <li class="seat_number">
-              <form action="" method="post">
-                {% csrf_token %}
-                <form action = "" method = "get">
-                <input type="checkbox" id="1A" name="display_type" value="selected_seat"/>
-                <label for="1A">A</label>
-                <input type="submit" value="OK">
-                </form>
+              <input type="checkbox" id="1A"
+              <!-- primer if seria para hacer inmediatamente que sea disabled cuando seleccionamos, para saltar un paso y no tener que pensar  en que se ponga rojo el asiento -->
+              <!-- {% if checkbox == checked %} disabled {% else %} "" {% endif %} -->
+              {% if checkbox == checked %} seats.seat_flag {% else %} '' {% endif %} >
+              {% if checkbox == checked && id == seat.id %} seat.seat_flag {% else %} '' {% endif %}
+               <! -- <div>
+                 <p>Window Seat</p>
+                 <p>First Class</p>
+                 <p>Price:</p>
+               </div> -->
+              <label for="1A">A</label>
             </li>
+            </details>
             <li class="seat_number">
               <input type="checkbox" id="1B" />
+              <div>
+                 <p>Middle Seat</p>
+                 <p>First Class</p>
+                 <p>Price:</p>
+               </div>
               <label for="1B">B</label>
             </li>
             <li class="seat_number">
@@ -619,9 +621,9 @@
   <h6 class = "text-center col-6 mx-auto text-secondary"> Please be sure of your selection before pressing the confirmation button. </h6>
   <br>
   <div class="d-grid gap-2 col-2 mx-auto"> <!--positions the "confirm" button in the center -->
-    <input type="submit" value="OK">
       <a href= {% url 'confirmed' %} type='button' class='btn btn-primary'>Confirm selection</a>
       <!-- This redirects to the confirmed page once we have confirmed the selected seats -->
+      <!-- would be cool to add a popover that asks if i am ready to confirm when clicking on confirm -->
     </div>
   <br>
   <br>
@@ -636,3 +638,14 @@
               <label for="1A">A</label>
             </li>
             </details> -->
+
+
+{% for row in seat_number %}
+<div class="seat">
+<p>{{ row }}</p>
+</div>
+{% endfor %}
+
+{% for seat in seat_number %}
+  {{% seat.seat_flag %}}  this prints 3 because the seat is still available, 1 means its not available
+{% endfor %}
