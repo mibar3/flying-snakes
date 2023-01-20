@@ -52,7 +52,7 @@ class AirlineSeat(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ['-seat_number', 'seat_class', 'seat_location', 'seat_flag']
+        ordering = ['-seat_number',]
 
     # Methods
     def get_absolute_url(self):
