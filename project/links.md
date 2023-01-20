@@ -2,6 +2,33 @@
 
 https://www.youtube.com/watch?v=4XYsODaQ6Ok (really good overview to refresh django and html :) from 12:37 onwards he shows how to add changes in the website)
 
+## MAKING CHANGES IN THE REPOSITORY
+
+1. Clone repository 
+2. Create a branch: 
+git branch miranda-1
+3. Checkout into your new branch:
+git checkout miranda-1
+4. Check that you are into your branch:
+git branch
+5. Make all the changes you wish
+6. Add the changes in your branch:
+git add .
+7. Commit the changes in your branch:
+git commit -m "message"
+8. Change back into the main branch:
+git checkout main
+9. Merge the changes into the main (while being in the main branch):
+git merge miranda-1
+10. Push the changes added into the main onto github:
+git push
+
+11. If you get in issue that says the remote repository has new changes that your local repository still doesnt have, it will suggest you do a pull command before pushing again. So just do:
+git pull
+git push
+And it should work :)
+
+
 ## Important!
 When running the server, in order to view the seats which are retrieved from a .txt file you must first run the dashboard page. ONLY RUN THE DASHBOARD ONCE, IF YOU RUN IT MORE TIMES THE DATA WILL DUPLICATE EACH TIME. It is only to open the dashboard once, from then on eacht time you run the server the database will have loaded and the seats will show up.
 
@@ -69,3 +96,9 @@ https://www.youtube.com/watch?v=rjxpL89BEX4
 
 ## Fetch Data From a Database And Output To A Webpage (Using pythons classes and atributes)
 https://www.youtube.com/watch?v=H3joYTIRqKk
+
+## Creating a branch
+https://www.youtube.com/watch?v=QV0kVNvkMxc
+
+## Merging changes in branches and commiting into the main branch
+https://www.youtube.com/watch?v=XX-Kct0PfFc
