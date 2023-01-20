@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 import os
-from django.core.mail import send_mail
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 from .models import AirlineSeat
-from .models import Passenger
 
 
 def index_view(request):
@@ -31,13 +31,13 @@ def register_view(request):
                 user.set_password(password)  # passing the password to the POST function
                 user.save()
                 print('success')
-                return redirect('home')
+                return redirect('')
 
     else:
         return render(request, 'registration/form.html')
 
 
-def login(request):
+'''def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -49,7 +49,26 @@ def login(request):
             messages.info(request, 'Invalid Email or Password')
             return redirect('home')
     else:
-        return render(request, "registration/login.html")
+        return render(request, "registration/login.html")'''
+
+
+def login(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = authenticate(email=email, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as {user.first_name}.")
+                return redirect("seats")
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request=request, template_name="registration/login.html", context={"login_form": form})
 
 
 def logout(request):
@@ -59,75 +78,90 @@ def logout(request):
 
 def dashboard_view(request):
     module_dir = os.path.dirname(__file__)
-    file_path = os.path.join(module_dir, 'input_seat.txt')  # full path to text.
+    file_path = os.path.join(module_dir, 'input_seat.txt')
     with open(file_path, 'r') as f:
         ls = f.readlines()[1:]
         for l in ls:
             # splitting the seats line by line
             data = l.split()
-            for i in data:
+            #print("data:", data)
+            for i in data[1:]:
                 count = int(data[0])
-                # print("count", count)
-                # print(data)
-                # print(i)
+                #print('count', count)
+                #print('i', i)
                 # Create an empty instance of your model
                 obj = AirlineSeat()
-                # Populate the fields of the model based on the record line
-                if (i == 'A' and 0 < count <= 3) or (i == 'F' and 0 < count < 3):
+                if count <= 3:
+                    seatno = '0' + str(count) + i
+                    if i == 'A' or i == 'F':
+
+                        obj.seat_number = seatno
+                        obj.seat_class = '1'
+                        obj.seat_location = '1'
+                        obj.save()
+                    elif i == 'B' or i == 'E':
+
+                        obj.seat_number = seatno
+                        obj.seat_class = '1'
+                        obj.seat_location = '2'
+                        obj.save()
+                    else:
+
+                        obj.seat_number = seatno
+                        obj.seat_class = '1'
+                        obj.seat_location = '3'
+                        obj.save()
+                if 3 < count <= 6:
+                    seatno = '0' + str(count) + i
+                    if i == 'A' or i == 'F':
+                        obj.seat_number = seatno
+                        obj.seat_class = '2'
+                        obj.seat_location = '1'
+                        obj.save()
+                    elif i == 'B' or i == 'E':
+                        obj.seat_number = seatno
+                        obj.seat_class = '2'
+                        obj.seat_location = '2'
+                        obj.save()
+                    else:
+                        obj.seat_number = seatno
+                        obj.seat_class = '2'
+                        obj.seat_location = '3'
+                        obj.save()
+                if 6 < count <= 9:
+                    seatno = '0' + str(count) + i
+                    if i == 'A' or i == 'F':
+                        obj.seat_number = seatno
+                        obj.seat_class = '3'
+                        obj.seat_location = '1'
+                        obj.save()
+                    elif i == 'B' or i == 'E':
+                        obj.seat_number = seatno
+                        obj.seat_class = '3'
+                        obj.seat_location = '2'
+                        obj.save()
+                    else:
+                        obj.seat_number = seatno
+                        obj.seat_class = '3'
+                        obj.seat_location = '3'
+                        obj.save()
+                if count > 9:
                     seatno = str(count) + i
-                    print(seatno)
-                    obj.seat_number = seatno
-                    obj.seat_class = '1'
-                    obj.seat_location = '1'
-                    obj.save()
-                elif (i == 'B' and 0 < count <= 3) or (i == 'E' and 0 < count < 3):
-                    seatno = str(count) + i
-                    obj.seat_number = seatno
-                    obj.seat_class = '1'
-                    obj.seat_location = '2'
-                    obj.save()
-                elif (i == 'C' and 0 < count <= 3) or (i == 'D' and 0 < count < 3):
-                    seatno = str(count) + i
-                    obj.seat_number = seatno
-                    obj.seat_class = '1'
-                    obj.seat_location = '3'
-                    obj.save()
-                elif (i == 'A' and 3 < count <= 6) or (i == 'F' and 3 <= count < 6):
-                    seatno = str(count) + str(i)
-                    obj.seat_number = seatno
-                    obj.seat_class = '2'
-                    obj.seat_location = '1'
-                    obj.save()
-                elif (i == 'B' and 3 < count <= 6) or (i == 'E' and 3 <= count < 6):
-                    seatno = str(count) + str(i)
-                    obj.seat_number = seatno
-                    obj.seat_class = '2'
-                    obj.seat_location = '2'
-                    obj.save()
-                elif (i == 'C' and 3 < count <= 6) or (i == 'D' and 3 <= count < 6):
-                    seatno = str(count) + str(i)
-                    obj.seat_number = seatno
-                    obj.seat_class = '2'
-                    obj.seat_location = '3'
-                    obj.save()
-                elif (i == 'A' and count > 6) or (i == 'F' and count >= 6):
-                    seatno = str(count) + str(i)
-                    obj.seat_number = seatno
-                    obj.seat_class = '3'
-                    obj.seat_location = '1'
-                    obj.save()
-                elif (i == 'B' and count > 6) or (i == 'E' and count >= 6):
-                    seatno = str(count) + str(i)
-                    obj.seat_number = seatno
-                    obj.seat_class = '3'
-                    obj.seat_location = '2'
-                    obj.save()
-                elif (i == 'C' and count > 6) or (i == 'D' and count >= 6):
-                    seatno = str(count) + str(i)
-                    obj.seat_number = seatno
-                    obj.seat_class = '3'
-                    obj.seat_location = '3'
-                    obj.save()
+                    if i == 'A' or i == 'F':
+                        obj.seat_number = seatno
+                        obj.seat_class = '3'
+                        obj.seat_location = '1'
+                        obj.save()
+                    elif i == 'B' or i == 'E':
+                        obj.seat_number = seatno
+                        obj.seat_class = '3'
+                        obj.seat_location = '2'
+                        obj.save()
+                    else:
+                        obj.seat_number = seatno
+                        obj.seat_class = '3'
+                        obj.seat_location = '3'
+                        obj.save()
     # print("I am here")
 
     return render(request, 'registration/dashboard.html')
@@ -135,80 +169,11 @@ def dashboard_view(request):
 
 def seat_view(request):
     seat_list = AirlineSeat.objects.all()
-
-    if request.method == "POST":
-        display_type = request.POST.get("display_type", None)
-        if display_type in ["selected_seat"]:
-            print('The name that was typed in is:')
-            print(request.POST)
-            # Handle whichever was selected here
-
-    return render(request, 'registration/seat_view.html', {'seat_list': seat_list})
+    # sort in ascending order
+    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
+    return render(request, 'registration/seat_view.html', {'seat_list': newseat_list})
 
 
 def confirmed_view(request):
-    # send a seat confirmation email)
-    # the variables used come from the registration function
-    # have to figure out how to import the variables from registration function
-
-    # https://www.youtube.com/watch?v=xNqnHmXIuzU
-    '''send_mail(
-        'Account confirmation' + first_name + last_name,  # subject
-        'Thank you for signing up to our airline reservation system!',  # message
-        [miri.cbe @ gmail.com],  # from email
-        email,  # To Email
-    ) '''
-
+    #if confirmed button is clicked, change flag into '1'
     return render(request, 'registration/confirmed.html')
-
-def base(request):
-    return render(request, 'registration/base.html')
-
-def help(request):
-    return render(request,'registration/help.html')
-
-def seat_test(request):
-    seat_list = AirlineSeat.objects.all()
-    return render(request, 'registration/seat_test.html', {'seat_list': seat_list})
-
-
-''' This is the code is used from https://www.geeksforgeeks.org/render-html-forms-get-post-in-django/ 
-    to test the get post in html'''
-def your_template(request):
-    # logic of view will be implemented here
-    print('The name that was typed in is:')
-    print(request.POST)
-    return render(request, 'registration/your_template.html')
-
-
-def statistics(request):
-    #Counting taken and available Seats
-
-    #available_count = AirlineSeat.seat_flag.all()
-    #reserved_count = AirlineSeat.objects.SeatFlags(models.RED).count
-
-    #Percentage of taken and available Seats
-
-    #available_percentage = (available_count / 60) * 100
-    #reserved_percentage = (reserved_count / 60) * 100
-
-    #Listing taken and available Seats
-
-    #available_list = AirlineSeat.objects.SeatFlags(models.GREY)
-    #reserved_list = AirlineSeat.objects.SeatFlags(models.RED)
-
-    #Counting the Users
-
-    #user_count = Passenger.objects.all().count
-
-    #Listing User and their information
-
-    #user_list = Passenger.objects.all()
-
-    return render(request, 'registration/statistics.html',
-    {#'available_count': available_count,
-    #'reserved_count': reserved_count,
-    #'available_list': available_list,
-    #'reserved_list': reserved_list,
-    #'user_list': user_list
-    })
