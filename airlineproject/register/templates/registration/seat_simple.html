@@ -20,8 +20,10 @@
     </div>
 </form>
 
-{% for seat in newseat_list%}
-    {{seat.seat_number}}
+<ul>
+{% for seat in seat_list %}
+    {{ seat.seat_number }}
 {% endfor %}
+</ul>
 
 {% endblock %}
