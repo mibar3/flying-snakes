@@ -212,3 +212,26 @@ def statistics(request):
     #'reserved_list': reserved_list,
     #'user_list': user_list
     })
+
+def seat_simple(request):
+    seat_list = AirlineSeat.objects.all()
+    # Sort in ascending order
+    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
+    # print(newseat_list) #proves that i can access the seats!
+
+    selected_seat = request.POST # We save what has been inputed in the page into a variable
+    selected_seat = selected_seat.get('your_seat') # This is how we access the value entered for the key 'your_seat'
+    print('The seat to be reserved is:', selected_seat)
+
+    # Since we are working with a QueryDict, this is how we access the keys
+    #keys = selected_seat.keys()
+    #print("These are the keys stored in the QueryDict: ", keys)
+
+    if selected_seat in newseat_list:
+        print("this seat should become unavailable!")
+        # change the flag of the seat, i am unsure of how to access the seat number of an object
+
+    # if selected seat != ... for the case that an invalid value is typed in
+        # print()
+
+    return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})

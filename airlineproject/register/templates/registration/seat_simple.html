@@ -1,0 +1,27 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+
+<form action="" method="post" class="form-horizontal form-groups-bordered" role="form">
+    {%csrf_token%}
+    <br class="form-group">
+    <label for="your_seat">Which seat would you like to reserve? </label>
+    </br>
+    </br>
+    <div class="row">
+        <div class="col-lg-8">
+        <input id="your_seat" type="text" name="your_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 04A">
+    <!-- The seat number entered gets stored as a value for the key 'your_seat' in a QueryDict (subclass of dict) -->
+    </div>
+    <div class="col-1 col-lg-offset-8">
+        <a class="btn btn-success btn-icon">
+        <input type="submit" class="btn btn-success btn-icon" value= "OK" onclick="return confirm('Are you sure of your selection?')" >
+    </a>
+    </div>
+</form>
+
+{% for seat in newseat_list%}
+    {{seat.seat_number}}
+{% endfor %}
+
+{% endblock %}
