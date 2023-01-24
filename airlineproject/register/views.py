@@ -3,6 +3,8 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 import os
 from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
 
 # Create your views here.
 from .models import AirlineSeat
@@ -165,16 +167,6 @@ def seat_test(request):
     seat_list = AirlineSeat.objects.all()
     return render(request, 'registration/seat_test.html', {'seat_list': seat_list})
 
-
-''' This is the code is used from https://www.geeksforgeeks.org/render-html-forms-get-post-in-django/ 
-    to test the get post in html'''
-def your_template(request):
-    # logic of view will be implemented here
-    print('The name that was typed in is:')
-    print(request.POST)
-    return render(request, 'registration/your_template.html')
-
-
 def statistics(request):
     #Counting taken and available Seats
 
@@ -212,25 +204,29 @@ def seat_simple(request):
     # Sort in ascending order
     newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
     #print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
-    print(seat_list)
+
+    # This is where we compare the input of the user with the existing elements in our database
+    # This is an alternative to the code
+    if request.method == "GET":
+        selected_seat = request.GET.get("selected_seat")
+        print("The seat that has been selected is:", selected_seat)
+        # print("HELLOOOOOOOO") # Just checking we are entering the if
+        for seat in newseat_list:
+            print(seat, selected_seat) # To check the entered seat matches the database seat
+            if selected_seat == seat.seat_number:
+                print("Matched")
+                print(seat.seat_number)
+                # Change flag of seat.seat_number selected here
+                break
+            else:
+                print("not match")
 
 
-    selected_seat = request.POST # We save what has been inputed in the page into a variable
-    selected_seat = selected_seat.get('selected_seat') # This is how we access the value entered for the key 'your_seat'
-    print('The seat to be reserved is:', selected_seat)
 
-    # Since we are working with a QueryDict, this is how we access the keys
-    #keys = selected_seat.keys()
-    #print("These are the keys stored in the QueryDict: ", keys)
-
-    print(newseat_list)
-
-    if request.method == "POST":
-        selected_seat = request.POST.get("selected_seat", None)
-        if selected_seat in newseat_list:
-            print('The seat that has been selected is:')
-            print(request.POST)
-            # Change flag of whichever was selected here
+    ''' Less optimal alternative to access the inputed seat from the user  
+        seat_input = request.GET  # We save what has been inputed in the page into a variable
+        reserved_seat = seat_input.get('selected_seat')  # This is how we access the value entered for the key 'your_seat'
+        print('Your reserved seat is:', reserved_seat) '''
 
     return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
 
@@ -247,3 +243,14 @@ def seat_iris(request):
         seat_selected = request.POST['seat_selected']
         if seat_selected in newseat_list:
             newseat_list'''
+
+def testing(request):
+    input = request.GET  # We save what has been inputed in the page into a variable
+    person_name = input.get('your_name')  # This is how we access the value entered for the key 'your_seat'
+    print('Your name is:', person_name)
+
+    # Since we are working with a QueryDict, this is how we access the keys
+    keys = input.keys()
+    print("These are the keys stored in the QueryDict: ", keys)
+
+    return render(request, 'registration/testing.html')
