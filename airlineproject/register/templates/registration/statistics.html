@@ -1,0 +1,79 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+
+<!-- Titel Beginning-->
+<div class="header" >
+    <h1 class="text-center"><font color ="green">Here are some statistics</font></h1>
+</div>
+<!-- Titel Ending-->
+</br>
+<!-- Subtitle 1 Beginning-->
+<div class="subtitle">
+    <h3>Seat Information</h3>
+</div>
+<!-- Subtitle 1 Ending-->
+</br>
+<!-- Counting Content Beginnging-->
+<div class="card">
+    <div class="card-header">How many taken and available Seats?</div>
+    <div class="card-body">
+        <p class="card-text">Available Seats: <!-- {{available_count}} ({available_percentage})--></p>
+        <p class="card-text">Taken Seats: <!--{reserved_count} ({reserved_percentage})--></p>
+    </div>
+</div>
+<!--Counting Content Ending-->
+<br><br/>
+<!--Listing the Seats Beginning-->
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card"> <!--Listing the available Seats-->
+            <div class="card-header">All the available Seats</div>
+            <div class="card-body">
+                <p class="card-test"><!--{available_list}--></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card"> <!--Listing the reserves/taken Seats-->
+            <div class="card-header">All the taken Seats</div>
+            <div class="card-body">
+                <p class="card-text"><!--{reserved_list}--></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Listing the Seats Ending-->
+</br>
+<!-- Subtitle 2 Beginning-->
+<div class="Subtitle">
+<h3>User information</h3>
+</div>
+<!-- Subtitle 2 Ending-->
+</br>
+<!--Counting Users Beginning-->
+<div class="card">
+    <div class="card-header">How many passengers are registrated?</div>
+    <div class="card-body">
+        <p class="card-text">Passengers: <!--{user_count}--></p>
+    </div>
+</div>
+<!--Counting Users Ending-->
+</br>
+<!--Listing the User Information Beginning-->
+{% for Passenger in user_list %}
+<div class="card">
+<div class="card-header">{{Passenger}}</div>
+    <div class="card-body">
+        <p class="card-text">
+        <ul>
+            <li>Name:<!--{{Passenger.passsenger_name}}--></li>
+            <li>Age:<!--{{Passenger.passsenger_age}}--></li>
+            <li>Phone:<!--{{Passenger.passsenger_phone}}--></li>
+{% endfor %}
+        </ul>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
