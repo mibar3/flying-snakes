@@ -18,4 +18,5 @@ urlpatterns = [
     path('your_template', views.your_template, name='your_template'),
     path('statistics', views.statistics, name='statistics'),
     path('seat_simple', views.seat_simple, name='seat_simple'),
+    path('seat_iris', views.seat_iris, name='seat_iris'),
 ]

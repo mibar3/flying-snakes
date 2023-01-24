@@ -289,7 +289,7 @@
     </div>
 </form>
 {% for seat in seat_list %}
-    {{seat}}
+    {{seat.seat_number.1}}
 {% endfor %}
 
 
@@ -298,7 +298,7 @@
     <div class="fuselage">
 {% for seat in seat_list %}
         <form action="" method="post">
-                {% csrf_token %}
+            {% csrf_token %}
     <input type="checkbox" id="{{seat.seat_number.1}}" name="selected_seat" value="1A"/>
         <label for="{{seat.seat_number.1}}">A</label>
             <input type="submit" value="OK">

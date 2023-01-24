@@ -1,0 +1,18 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+
+{% for seat in seat_list%}
+  <button onclick="changeColor()">seat.seat_number</button>
+  <div id="my-div"></div>
+    {{seat.seat_number}}
+{% endfor %}
+</div>
+
+<script>
+function changeColor() {
+  document.getElementById("my-div").style.backgroundColor = "green";
+}
+</script>
+
+{% endblock %}
