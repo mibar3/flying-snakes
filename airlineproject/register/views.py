@@ -8,7 +8,6 @@ from django.core.mail import send_mail
 from .models import AirlineSeat
 from .models import Passenger
 
-
 def index_view(request):
     return render(request, 'registration/index.html')
 
@@ -217,21 +216,63 @@ def seat_simple(request):
     seat_list = AirlineSeat.objects.all()
     # Sort in ascending order
     newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
-    # print(newseat_list) #proves that i can access the seats!
+    #print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
+    print(newseat_list)
+
+
+    ''' IGNORE THIS COMMENTED STUFF
+    
+    # CLEANING UP THE LIST, MANY VALUES WHERE REPEATED MULTIPLE TIMES
+    first_half, second_half = newseat_list[:71], newseat_list[72:]
+    del second_half[::2] # deletes every second item because each seat number is repeated one until 9F
+    # i had to separate the newseat_list because the values were doubled, first 01A, 02B, etc, until 10F
+    # then the values started again at 1A, 2B but ended in 9F
+    # print(f'{first_half=}')
+    # print("THIS IS WHERE THE FIRST HALF ENDS")
+    # print(f'{second_half=}')
+
+    row_10_first_half = first_half[54:]
+    del row_10_first_half[::3] # first delete every third value, because from 10A onwards every seat is repeated thrice
+    del row_10_first_half[::2] # once every row from 10A onwards only repeated twice, delete every second item
+    #print(f'{row_10_first_half=}')
+    # here i took the row 10 from the first half and added it to the list with 1A, 2A, etc.
+    second_half.extend(row_10_first_half)
+    # print(second_half)
+
+    # END OF CLEANING THE LIST
 
     selected_seat = request.POST # We save what has been inputed in the page into a variable
     selected_seat = selected_seat.get('your_seat') # This is how we access the value entered for the key 'your_seat'
     print('The seat to be reserved is:', selected_seat)
+    print(type(second_half)) '''
+
+
+
 
     # Since we are working with a QueryDict, this is how we access the keys
     #keys = selected_seat.keys()
     #print("These are the keys stored in the QueryDict: ", keys)
 
-    if selected_seat in newseat_list:
+
+    if "AirlineSeat: 9C" in second_half:
+        print("Object exists in the dictionary")
+    else:
+        print("Object does not exist in the dictionary")
+
+    '''if selected_seat in newseat_list:
         print("this seat should become unavailable!")
         # change the flag of the seat, i am unsure of how to access the seat number of an object
-
+    '''
     # if selected seat != ... for the case that an invalid value is typed in
         # print()
+
+
+
+    if request.method == "POST":
+        selected_seat = request.POST.get("selected_seat", None)
+        if selected_seat in newseat_list:
+            print('The seat that has been selected is:')
+            print(request.POST)
+            # Change flag of whichever was selected here
 
     return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
