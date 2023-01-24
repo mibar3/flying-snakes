@@ -173,6 +173,14 @@ def seat_view(request):
     newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
     return render(request, 'registration/seat_view.html', {'seat_list': newseat_list})
 
+'''def seat_selection(request):
+    seat_list = AirlineSeat.objects.all()
+    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
+    if request.method=='POST':
+        seat_selected = request.POST['seat_selected']
+        if seat_selected in newseat_list:
+            newseat_list'''
+
 
 def confirmed_view(request):
     #if confirmed button is clicked, change flag into '1'
