@@ -405,7 +405,11 @@ Must add that if the seat has been reserved it must be marked with an X -->
   </tr>
     <tr>
     <td>10</td>
+    {% if seat.seat_flag == 1 %}
+        <td>X</td>
+    {% else %}
     <td>A</td>
+    {% endif %}
     <td>B</td>
     <td>C</td>
     <td>D</td>

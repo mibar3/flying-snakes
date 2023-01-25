@@ -1,10 +1,11 @@
 {% extends 'registration/base.html' %}
 
 {% block content %}
-    <h1 class="text-center text-success">Welcome to the Flying Snakes Seat Reservation System!</h1>
-    <h3 class="text-center text-success">To reserve a seat please login or sign up</h3>
-    <!--
-    <a href= {% url 'login' %} type='button' class='btn btn-success btn-lg'>Login</a>
-    <a href= {% url 'register' %} type='button' class='btn btn-success btn-lg'>Sign up</a>
-    -->
+   {%load static%}
+    <body background="{% static 'images/background.png' %}" style="background-position: center; background-size:contain; background-repeat: no-repeat; margin-bottom:650px">
+       <div class="transparenthintergrund" style="background:rgba(255,250,240,0.7)">
+        <div class="text-center text-success"><font color="black"><font size="6">Welcome to the Flying Snakes Seat Reservation System!</div>
+        <div class="text-center text-success"><font color="black"><font size="5">To reserve a seat please login or sign up</div>
+       </div>
+    </body>
 {% endblock %}
