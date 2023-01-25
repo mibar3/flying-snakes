@@ -216,11 +216,11 @@ def seat_simple(request):
             if selected_seat == seat.seat_number:
                 print("Matched")
                 print(seat.seat_number)
-                # Change flag of seat.seat_number selected here
+                seat.seat_flag = 1;
+                print("The new flag for this seat is: ", seat.seat_flag)
                 break
             else:
                 print("not match")
-
 
 
     ''' Less optimal alternative to access the inputed seat from the user  

@@ -326,11 +326,11 @@ Must add that if the seat has been reserved it must be marked with an X -->
   </tr>
     <tr>
     <td></td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
+    <td id="1A">A</td>
+    <td id="1B">B</td>
+    <td id="1C">C</td>
+    <td id="1D">D</td>
+    <td id="1F">F</td>
   </tr>
   <tr>
     <td>1</td>
@@ -358,7 +358,7 @@ Must add that if the seat has been reserved it must be marked with an X -->
   </tr>
     <tr>
     <td>4</td>
-    <td>A</td>
+    <td>A</td> {% if seat.seat_flag == 1 and selected_seat == "4A" %} <td>X</td> {% endif %}
     <td>B</td>
     <td>C</td>
     <td>D</td>
