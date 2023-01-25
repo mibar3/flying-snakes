@@ -201,13 +201,19 @@ def statistics(request):
     })
 
 def seat_simple(request):
+
+    # current issue is saving the altered seat_flag into the database, because every time theres a new input
+    # of a seat the flag of the seat inputed before gets resetted to 3(available)
+
+    # still have to figure out how to pass the selected_seat to the html to include in the if
+
+
     seat_list = AirlineSeat.objects.all()
     # Sort in ascending order
     newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
     #print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
 
-    # This is where we compare the input of the user with the existing elements in our database
-    # This is an alternative to the code
+
     if request.method == "GET":
         selected_seat = request.GET.get("selected_seat")
         print("The seat that has been selected is:", selected_seat)
@@ -216,12 +222,21 @@ def seat_simple(request):
             print(seat, selected_seat) # To check the entered seat matches the database seat
             if selected_seat == seat.seat_number:
                 print("Matched")
-                print(seat.seat_number)
-                seat.seat_flag = 1;
-                print("The new flag for this seat is: ", seat.seat_flag)
+                print("The current flag of", seat.seat_number, "is", seat.seat_flag)
+                if seat.seat_flag == '3':
+                    seat.seat_flag = 1;
+                    # obj.save() # something like this to saved the changed flag into the databse!
+                    print("The new flag for this seat is: ", seat.seat_flag)
+                elif seat.seat_flag == '1':
+                    print("This seat is already taken")
+                    print("An error should show up in the html!!")
+                    messages.info(request, 'This seat has already been reserved. Please choose another seat.')
+                    return redirect('registration/seat_simple.html')
                 break
             else:
-                print("not match")
+                print("no Match")
+
+
 
 
     ''' Less optimal alternative to access the inputed seat from the user  

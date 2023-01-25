@@ -313,6 +313,11 @@ Must add that if the seat has been reserved it must be marked with an X -->
 <div>
     </br>
 </div>
+{% for seat in seat_list%}
+{{seat.seat_number}}
+{% endfor %}
+
+{{seat_input}}
 
 <table class="center" style="width:20%">
   <tr>
@@ -334,11 +339,19 @@ Must add that if the seat has been reserved it must be marked with an X -->
   </tr>
   <tr>
     <td>1</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
+    {% if seat.seat_number == 10A %} <!-- this is just me checking the if else, this should actually check if a seat.seat_number matches the selected_seat, then his should be the new display of seats -->
+        <td>X</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>F</td>
+    {% else %}
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>F</td>
+  {% endif %}
   </tr>
   <tr>
     <td>2</td>
@@ -358,7 +371,10 @@ Must add that if the seat has been reserved it must be marked with an X -->
   </tr>
     <tr>
     <td>4</td>
-    <td>A</td> {% if seat.seat_flag == 1 and selected_seat == "4A" %} <td>X</td> {% endif %}
+    <td>A</td>
+        {% if seat.seat_flag == 1 and selected_seat == "4A" %}
+        <td>X</td>
+        {% endif %}
     <td>B</td>
     <td>C</td>
     <td>D</td>
