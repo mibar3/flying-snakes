@@ -9,7 +9,7 @@
 
     .plane {
       margin: 20px auto;
-      max-width: 300px;
+      max-width: 420px;
     }
 
     .exit {
@@ -268,6 +268,13 @@
      */
 
 
+   /* TABLE STYLING */
+
+    table, th, td {
+      border:1px solid black;
+    }
+
+
     </style>
 <!-- ***** Style Ending ***** -->
 
@@ -300,16 +307,118 @@ How to add rows
 How to add the row number on the side or on the middle
 
 Must add that if the seat has been reserved it must be marked with an X -->
+<div>
+    </br>
+</div>
+
+<table style="width:10%">
+  <tr>
+      <th></th>
+    <th>A</th>
+    <th>B</th>
+    <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>4</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>6</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>7</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+    <tr>
+    <td>8</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>9</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>10</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+</table>
+
+
+
+<div>
+    </br>
+    </br>
+</div>
 
 
 <div class="plane">
-      <div class="fuselage">
-          <ol class="cabin fuselage">
-              {% for seat in seat_list %}
-                {{seat.seat_number}}
-                {% endfor %}
-          </ol>
-      </div>
+    <div class="fuselage">
+        <ol class="cabin fuselage">
+            {% for seat in seat_list %}
+                <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}"/>
+                <label for="{{seat.seat_number}}">{{seat.seat_number}}</label>
+            {% endfor %}
+        </ol>
+    </div>
 </div>
 
 
