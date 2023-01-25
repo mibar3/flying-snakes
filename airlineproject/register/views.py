@@ -224,7 +224,7 @@ def seat_simple(request):
                 print("The current flag of", seat.seat_number, "is", seat.seat_flag)
                 if seat.seat_flag == '3':
                     seat.seat_flag = 1;
-                    obj.save() # something like this to saved the changed flag into the databse!
+                    # obj.save() # something like this to saved the changed flag into the databse!
                     print("The new flag for this seat is: ", seat.seat_flag)
                 elif seat.seat_flag == '1':
                     print("This seat is already taken")
