@@ -46,8 +46,16 @@ for JS stuff for example a script src= ... file
 
   <!-- ****** Content Area Beginning ***** -->
     </br> <!-- creates a space between the navbar and the rest of the content -->
-    <div class = "container"> <!-- positions all of the text further to the right -->
+    <div class = "container">
+      {% if messages %}<!-- positions all of the text further to the right -->
+        {% for message in messages %}
 
+      <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        {{ message }}
+      </div>
+        {% endfor %}
+      {% endif %}
     {% block content %}
 
       <!-- THIS IS WHERE EACH PAGE OF OUR APP WILL GET PULLED AND OUTPUTED -->

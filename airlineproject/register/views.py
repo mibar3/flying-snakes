@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import os
 from django.core.mail import send_mail
@@ -38,22 +39,22 @@ def register_view(request):
         return render(request, 'registration/form.html')
 
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(email=email, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
-            auth.login(request, user)
-            return redirect('dashboard')
+            login(request, user)
+            return redirect('seat_simple')
         else:
             messages.info(request, 'Invalid Email or Password')
-            return redirect('home')
+            return redirect('login')
     else:
-        return render(request, "registration/login.html")
+        return render(request, "registration/login_test.html")
 
 
-def logout(request):
+def logout_user(request):
     auth.logout(request)
     return redirect('home')
 
