@@ -224,14 +224,17 @@ def seat_simple(request):
                 print("Matched")
                 print("The current flag of", seat.seat_number, "is", seat.seat_flag)
                 if seat.seat_flag == '3':
-                    seat.seat_flag = 1;
-                    # obj.save() # something like this to saved the changed flag into the databse!
+                    seat.seat_flag = '1';
+                    seat.save() # this saves the change in the database but when i input
+                    # the seat again after changing its flag the website crashes
                     print("The new flag for this seat is: ", seat.seat_flag)
                 elif seat.seat_flag == '1':
+                    ''' seat.seat_flag = '3'; # to reset any seat that has been reserved after testing
+                    seat.save() '''
                     print("This seat is already taken")
-                    print("An error should show up in the html!!")
+                    print("An error should show up in the website")
                     messages.info(request, 'This seat has already been reserved. Please choose another seat.')
-                    return redirect('registration/seat_simple.html')
+                    return redirect('/seat_simple')
                 break
             else:
                 print("no Match")
