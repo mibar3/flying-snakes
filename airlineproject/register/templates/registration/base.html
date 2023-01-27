@@ -30,7 +30,7 @@ for JS stuff for example a script src= ... file
             <a class="nav-link active" aria-current="page" href={% url "home" %}>Home</a>
             <a class="nav-link" href={% url "login" %}>Login</a>
             <a class="nav-link" href={% url "register" %}>Sign up</a>
-            <a class="nav-link" href={% url "login" %}>Logout</a>
+            <a class="nav-link" href={% url "logout" %}>Logout</a>
             <a class="nav-link" href={% url "statistics" %}>Statistics</a> <!--must change: only superuser can see-->
              <!-- must change the link to logout here, logout page doesnt exist yet -->
           </ul>
@@ -51,7 +51,7 @@ for JS stuff for example a script src= ... file
         {% for message in messages %}
 
       <div class="alert alert-danger d-flex align-items-center" role="alert">
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+      <svg class="bi flex-shrink-0 me-2" style="height:20px" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
         {{ message }}
       </div>
         {% endfor %}
