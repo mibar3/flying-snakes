@@ -48,14 +48,15 @@ def login_user(request):
             login(request, user)
             return redirect('seat_simple')
         else:
-            messages.info(request, 'Invalid Email or Password')
+            messages.info(request, 'Upsi: Your username or password is wrong.')
             return redirect('login')
     else:
         return render(request, "registration/login_test.html")
 
 
 def logout_user(request):
-    auth.logout(request)
+    logout(request)
+    messages.success(request, 'You have been successfully logged out!')
     return redirect('home')
 
 
