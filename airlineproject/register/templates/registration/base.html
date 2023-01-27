@@ -31,12 +31,16 @@ for JS stuff for example a script src= ... file
           {% if user.is_authenticated %}
           {% if user.is_superuser %}
             <li class="nav-item">
-               <a class="nav-link" href={% url "statistics" %}>Statistics</a> <!--must change: only superuser can see-->
+               <a class="nav-link" href={% url "statistics" %}>Statistics</a>
             </li>
           {% endif %}
             <li class="nav-item">
-              <a class="nav-link" href={% url "logout" %}>Logout</a>
+              <a class="nav-link" href={% url "seat_simple" %}>Seats</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href={% url "logout" %}?next={% url "home"%}>Logout</a>
+            </li>
+
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href={% url "login" %}>Login</a>
@@ -44,6 +48,7 @@ for JS stuff for example a script src= ... file
             <li class="nav-item">
               <a class="nav-link" href={% url "register" %}>Sign up</a>
             </li>
+
           {% endif %}
           </ul>
 
