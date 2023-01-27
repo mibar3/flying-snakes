@@ -52,29 +52,10 @@
       word-spacing: 20px;
     }
 
-
-
     ol {
       list-style: none;
       padding: 0;
       margin: 0;
-    }
-
-    .rowNumber{
-      display: block;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
-
-    .rowNumber label {
-      display: flex;
-      flex: 0 0 14.28571428571429%;
-      padding: 5px;
-      width:40px;
-      text-indent: 10px;
-      font-weight: bold;
-      color:rgb(120, 120, 120);
     }
 
     .seats {
@@ -289,7 +270,6 @@
 
     }
 
-
     </style>
 <!-- ***** Style Ending ***** -->
 
@@ -331,10 +311,11 @@ Must add that if the seat has been reserved it must be marked with an X -->
 
 <div class="plane">
     <div class="fuselage">
-        <ol class="cabin fuselage">
+        <ol class="cabin fuselage" >
                 {% for seat in seat_list %}
+
+                     <!-- This part adds the row number -->
                     {%if seat.seat_number == "10A" %}
-                    <!-- This part adds the row number -->
                     <input type="hidden" value="10">
                         <label for="{{seat.seat_number}}">10</label>
                     {%elif seat.seat_number == "1A" %}
@@ -372,19 +353,30 @@ Must add that if the seat has been reserved it must be marked with an X -->
                     <!-- This is where we decide how to display the seats -->
                     <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}"/>
                     {% if seat.seat_number.1 == "0" %}
-                        <label for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
-                    {% elif seat.seat_flag == "1" %}
-                        <label for="{{seat.seat_number}}">X</label>
+                        {% if seat.seat_flag == "1" %}
+                            <label for="{{seat.seat_number}}">X</label>
+                            <!-- tengo que hacer que este disabled si esta en x -->
+                        {% else %}
+                            <label for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
+                        {%endif%}
                     {% else %}
-                        <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                        {% if seat.seat_flag == "1" %}
+                            <label for="{{seat.seat_number}}">X</label>
+                            <!-- tengo que hacer que este disabled si esta en x -->
+                        {% else %}
+                            <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                        {%endif%}
                     {%endif%}
+                    <!-- This is where we separate the seats in rows -->
                     {% if seat.seat_number == "10F" or seat.seat_number == "1F" or seat.seat_number == "2F" or seat.seat_number == "3F" or seat.seat_number == "4F" or seat.seat_number == "5F" or seat.seat_number == "6F" or seat.seat_number == "7F" or seat.seat_number == "8F" or seat.seat_number == "9F"%}
                         </br>
                     {%endif%}
+                    <!-- End of separation by rows -->
                 {% endfor %}
         </ol>
     </div>
 </div>
+
 
 <div>
     </br>
