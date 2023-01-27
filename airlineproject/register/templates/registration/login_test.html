@@ -2,24 +2,26 @@
 
 {% block content %}
 
-  <h1>Login</h1>
+  <h1 class="text-center text-success">Welcome back!</h1>
+  <p class="text-center text-success">Please, login with your username and password.</p>
 <br/><br/>
 
   <form action="" method=POST>
     {% csrf_token %}
     <form>
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <label for="InputEmail1" class="form-label">Username</label>
         <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="InputPassword1" class="form-label">Password</label>
         <input type="password" class="form-control" name="password">
       </div>
 
-    <input type="submit"
-           value="Submit" class="btn btn-secondary">
-
+      <div class="mb-3">
+        <button type="submit" class="btn btn-success btn-lg">Login</button>
+      </div>
+    </form>
 
 {% endblock %}
