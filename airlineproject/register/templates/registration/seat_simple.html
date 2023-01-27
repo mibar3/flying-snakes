@@ -8,7 +8,7 @@
     }
 
     .plane {
-      margin: 20px auto;
+      margin: 30px auto;
       max-width: 420px;
     }
 
@@ -41,7 +41,18 @@
     .fuselage {
       border-right: 10px solid #d8d8d8;
       border-left: 10px solid #d8d8d8;
+      font-size: 20px;
+      word-spacing: 10px;
     }
+
+    .fuselage + input[type=hidden] {
+      border-right: 10px solid #d8d8d8;
+      border-left: 10px solid #d8d8d8;
+      font-size: 20px;
+      word-spacing: 20px;
+    }
+
+
 
     ol {
       list-style: none;
@@ -278,6 +289,7 @@
 
     }
 
+
     </style>
 <!-- ***** Style Ending ***** -->
 
@@ -313,11 +325,75 @@ Must add that if the seat has been reserved it must be marked with an X -->
 <div>
     </br>
 </div>
-{% for seat in seat_list%}
-{{seat.seat_number}}
-{% endfor %}
 
-{{seat_input}}
+<!-- si logro pasar un a count variable podria hacer usar un contador y cada vez que se llegue a count hacemos un break aka nueva row
+-->
+
+<div class="plane">
+    <div class="fuselage">
+        <ol class="cabin fuselage">
+                {% for seat in seat_list %}
+                    {%if seat.seat_number == "10A" %}
+                    <!-- This part adds the row number -->
+                    <input type="hidden" value="10">
+                        <label for="{{seat.seat_number}}">10</label>
+                    {%elif seat.seat_number == "1A" %}
+                    <input type="hidden" value="1">
+                        <label for="{{seat.seat_number}}">1</label>
+                    {%elif seat.seat_number == "2A" %}
+                    <input type="hidden" value="2">
+                        <label for="{{seat.seat_number}}">2</label>
+                    {%elif seat.seat_number == "3A" %}
+                    <input type="hidden" value="3">
+                        <label for="{{seat.seat_number}}">3</label>
+                    {%elif seat.seat_number == "4A" %}
+                    <input type="hidden" value="4">
+                        <label for="{{seat.seat_number}}">4</label>
+                    {%elif seat.seat_number == "5A" %}
+                    <input type="hidden" value="5">
+                        <label for="{{seat.seat_number}}">5</label>
+                    {%elif seat.seat_number == "6A" %}
+                    <input type="hidden" value="6">
+                        <label for="{{seat.seat_number}}">6</label>
+                    {%elif seat.seat_number == "7A" %}
+                    <input type="hidden" value="7">
+                        <label for="{{seat.seat_number}}">7</label>
+                    {%elif seat.seat_number == "8A" %}
+                    <input type="hidden" value="8">
+                        <label for="{{seat.seat_number}}">8</label>
+                    {%elif seat.seat_number == "9A" %}
+                    <input type="hidden" value="9">
+                        <label for="{{seat.seat_number}}">9</label>
+                    {%endif%}
+                    <!-- End of rows -->
+                    <!-- <input type="checkbox" value="1" disabled> -->
+
+
+                    <!-- This is where we decide how to display the seats -->
+                    <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}"/>
+                    {% if seat.seat_number.1 == "0" %}
+                        <label for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
+                    {% elif seat.seat_flag == "1" %}
+                        <label for="{{seat.seat_number}}">X</label>
+                    {% else %}
+                        <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                    {%endif%}
+                    {% if seat.seat_number == "10F" or seat.seat_number == "1F" or seat.seat_number == "2F" or seat.seat_number == "3F" or seat.seat_number == "4F" or seat.seat_number == "5F" or seat.seat_number == "6F" or seat.seat_number == "7F" or seat.seat_number == "8F" or seat.seat_number == "9F"%}
+                        </br>
+                    {%endif%}
+                {% endfor %}
+        </ol>
+    </div>
+</div>
+
+<div>
+    </br>
+    </br>
+     </br>
+    </br>
+</div>
+
+
 
 <table class="center" style="width:20%">
   <tr>
@@ -339,13 +415,13 @@ Must add that if the seat has been reserved it must be marked with an X -->
   </tr>
   <tr>
     <td>1</td>
-    {% if seat.seat_number == 10A %} <!-- this is just me checking the if else, this should actually check if a seat.seat_number matches the selected_seat, then his should be the new display of seats -->
+    {% if seat.seat_flag == 1 and seat.seat_number == 10A %} <!-- this is just me checking the if else, this should actually check if a seat.seat_number matches the selected_seat, then his should be the new display of seats -->
         <td>X</td>
         <td>B</td>
         <td>C</td>
         <td>D</td>
         <td>F</td>
-    {% else %}
+    {% else  %}
         <td>A</td>
         <td>B</td>
         <td>C</td>
@@ -432,27 +508,6 @@ Must add that if the seat has been reserved it must be marked with an X -->
     <td>F</td>
   </tr>
 </table>
-
-
-
-<div>
-    </br>
-    </br>
-     </br>
-    </br>
-</div>
-
-
-<div class="plane">
-    <div class="fuselage">
-        <ol class="cabin fuselage">
-            {% for seat in seat_list %}
-                <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}"/>
-                <label for="{{seat.seat_number}}">{{seat.seat_number}}</label>
-            {% endfor %}
-        </ol>
-    </div>
-</div>
 
 
 {% endblock %}

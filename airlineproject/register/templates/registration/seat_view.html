@@ -276,6 +276,9 @@
     <h4>Please click on the seat (or seats) you would like to reserve.</h4>
     </br>
 <!-- **** Cabin Beginning **** -->
+{%for seat in seat_list%}
+{{seat.seat_number}}
+{%endfor%}
 
      <div class="plane">
       <div class="fuselage">
@@ -285,13 +288,14 @@
         <li class="row row--1">
           <ol class="seats" type="A">
             <li class="seat_number">
-              <form action="" method="post">
-                {% csrf_token %}
-                <form action = "" method = "get">
+                {% if seat.seat_number == 10A and seat.seat_flag == 3%}
                 <input type="checkbox" id="1A" name="display_type" value="selected_seat"/>
                 <label for="1A">A</label>
-                <input type="submit" value="OK">
-                </form>
+                {% elif seat.seat_number == 10A and seat.seat_flag == 1%}
+                   <input type="checkbox" id="1A" name="display_type" value="selected_seat"/>
+                  <label for="1A">X</label>
+                  {%endif%}
+
             </li>
             <li class="seat_number">
               <input type="checkbox" id="1B" />

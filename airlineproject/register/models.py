@@ -32,6 +32,17 @@ class AirlineSeat(models.Model):
         GREEN = '2', 'SELECTED'
         GREY = '3', 'AVAILABLE'
 
+    ''' class SeatRow(models.TextChoices):
+        ONE = '1'
+        TWO = '2'
+        THREE = '3'
+        FOUR = '4'
+        FIVE = '5'
+        SIX = '6'
+        SEVEN = '7'
+        EIGHT = '8'
+        NINE = '9'
+        TEN  = '10' '''
 
     # Fields
     seat_number = models.CharField(max_length=20, help_text='Enter seat number')
@@ -46,9 +57,16 @@ class AirlineSeat(models.Model):
         default=SeatLocation.AISLE
     )
 
-    seat_flag = models.CharField(max_length=15,
-                                 choices=SeatFlags.choices,
-                                 default=SeatFlags.GREY)
+    seat_flag = models.CharField(
+        max_length=15,
+        choices=SeatFlags.choices,
+        default=SeatFlags.GREY)
+
+    ''' seat_row = models.CharField(
+        max_length=5,
+        choices=SeatRow.choices,
+        default=SeatRow.ONE) '''
+
 
     # Metadata
     class Meta:
