@@ -67,26 +67,8 @@
         line-break: normal;
     }
 
-    input+div {
-      display:none;
-    }
-    input[type=checkbox]:hover+div {
-      position: absolute;
-      display: block;
-      z-index: 1;
-      width: 350%;
-      border: solid 1px teal;
-      border-radius: 5%;
-      padding: 10px;
-      background: white;
-      left: calc(1rem + 100%);
-      bottom: 50%;
-      transform: translateY(50%);
-     }
-
     </style>
 <!-- ***** Style Ending ***** -->
-
 
 <form action="" method="get" class="form-horizontal form-groups-bordered" role="form">
     {%csrf_token%}
@@ -113,10 +95,6 @@
 <!-- QUESTIONS:
 How to tidy the list, it begins with 10? -->
 
-<div>
-    </br>
-</div>
-
 <div class="plane">
     <div class="fuselage">
         <ol class="cabin fuselage" >
@@ -128,13 +106,13 @@ How to tidy the list, it begins with 10? -->
                     {%elif seat.seat_number.1 == "A" %}
                     <input type="hidden" value="1">
                         <label for="{{seat.seat_number}}">{{seat.seat_number.0}}</label>
-
                     {%endif%}
                     <!-- End of rows -->
 
                     <!-- This is where we decide how to display the seats -->
+                    <a data-toggle="popover" title="CLASS : {{seat.seat_class}};  LOCATION : {{seat.seat_location}}">
                     <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
-                           autocomplete="off" />
+                           autocomplete="off" data-mdb-toggle="popover" />
 
                     {% if seat.seat_number.1 == "0" %}
 
@@ -144,7 +122,7 @@ How to tidy the list, it begins with 10? -->
                             <label class="btn btn-secondary" for="{{seat.seat_number}}">X</label>
 
                         {% else %}
-                            <label class="btn btn-outline-success" for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
+                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
                         {%endif%}
 
                     {% else %}
@@ -155,8 +133,10 @@ How to tidy the list, it begins with 10? -->
                             <label class="btn btn-secondary" for="{{seat.seat_number}}">X</label>
 
                         {% else %}
-                            <label class="btn btn-outline-success" for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
-                        {%endif%}
+                            <a data-toggle="popover" title="CLASS : {{seat.seat_class}};  LOCATION : {{seat.seat_location}}">
+                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                             </a>
+                            {%endif%}
 
                     {%endif%}
                     <!-- This is where we separate the seats in rows -->
@@ -165,6 +145,11 @@ How to tidy the list, it begins with 10? -->
                     {%endif%}
                     <!-- End of separation by rows -->
                 {% endfor %}
+            <script>
+            $(document).ready(function(){
+              $('[data-toggle="popover"]').popover();
+            });
+            </script>
         </ol>
     </div>
 </div>
@@ -176,7 +161,6 @@ How to tidy the list, it begins with 10? -->
      </br>
     </br>
 </div>
-
 
 
 <table class="center" style="width:20%">
