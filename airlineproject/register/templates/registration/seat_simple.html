@@ -67,6 +67,12 @@
         line-break: normal;
     }
 
+    @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css');
+
+    .container {
+        margin: 40px;
+    }
+
     </style>
 <!-- ***** Style Ending ***** -->
 
@@ -95,6 +101,8 @@
 <!-- QUESTIONS:
 How to tidy the list, it begins with 10? -->
 
+{%for seat in seat_list%}{{seat.seat_number}}{%endfor%}
+
 <div class="plane">
     <div class="fuselage">
         <ol class="cabin fuselage" >
@@ -110,7 +118,7 @@ How to tidy the list, it begins with 10? -->
                     <!-- End of rows -->
 
                     <!-- This is where we decide how to display the seats -->
-                    <a data-toggle="popover" title="CLASS : {{seat.seat_class}};  LOCATION : {{seat.seat_location}}">
+                    <a data-toggle="popover" title="CLASS : {{seat.seat_class}}  LOCATION : {{seat.seat_location}}">
                     <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
                            autocomplete="off" data-mdb-toggle="popover" />
 
@@ -145,11 +153,6 @@ How to tidy the list, it begins with 10? -->
                     {%endif%}
                     <!-- End of separation by rows -->
                 {% endfor %}
-            <script>
-            $(document).ready(function(){
-              $('[data-toggle="popover"]').popover();
-            });
-            </script>
         </ol>
     </div>
 </div>
