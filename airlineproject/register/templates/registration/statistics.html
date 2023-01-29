@@ -18,30 +18,42 @@
 <div class="card">
     <div class="card-header">How many taken and available Seats?</div>
     <div class="card-body">
-        <p class="card-text">Available Seats: <!-- {{available_count}} ({available_percentage})--></p>
-        <p class="card-text">Taken Seats: <!--{reserved_count} ({reserved_percentage})--></p>
+        <p class="card-text">Available Seats:  {{available_count}} ({{available_percentage}})</p>
+        <p class="card-text">Taken Seats: {{reserved_count}} ({{reserved_percentage}})</p>
     </div>
 </div>
 <!--Counting Content Ending-->
 <br><br/>
 <!--Listing the Seats Beginning-->
+
 <div class="row">
     <div class="col-sm-6">
         <div class="card"> <!--Listing the available Seats-->
             <div class="card-header">All the available Seats</div>
-            <div class="card-body">
-                <p class="card-test"><!--{available_list}--></p>
+
+            <div class="card-body" >
+                <p class="card-text" style="display:inline">
+                    {% for seats in available_list %}
+                    {{seats}}
+                    {% endfor %}
+                </p>
             </div>
+
         </div>
     </div>
+
+
     <div class="col-sm-6">
         <div class="card"> <!--Listing the reserves/taken Seats-->
             <div class="card-header">All the taken Seats</div>
+            {% for seats in reserved_list %}
             <div class="card-body">
-                <p class="card-text"><!--{reserved_list}--></p>
+                <p class="card-text">{{reserved_list}}</p>
+                {% endfor %}
             </div>
         </div>
     </div>
+
 </div>
 <!-- Listing the Seats Ending-->
 </br>
