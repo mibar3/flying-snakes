@@ -170,14 +170,15 @@ def seat_test(request):
 
 def statistics(request):
     #Counting taken and available Seats
+    seat_count = AirlineSeat.objects.all().count()
 
     available_count = AirlineSeat.objects.filter(seat_flag=3).count()
-    reserved_count = AirlineSeat.objects.filter(seat_flag=1).count
+    reserved_count = AirlineSeat.objects.filter(seat_flag=1).count()
 
     #Percentage of taken and available Seats
 
-    #available_percentage = available_count % 60
-    #reserved_percentage = reserved_count % 60
+    available_percentage = (available_count/seat_count) * 100
+    reserved_percentage = (reserved_count/seat_count) * 100
 
     #Listing taken and available Seats
 
@@ -193,10 +194,11 @@ def statistics(request):
     #user_list = Passenger.objects.all()
 
     return render(request, 'registration/statistics.html',
-    {'available_count': available_count,
+    {'seat_count': seat_count,
+    'available_count': available_count,
     'reserved_count': reserved_count,
-    #'available_percentage':available_percentage,
-    #'reserved_percentage':reserved_percentage,
+    'available_percentage':available_percentage,
+    'reserved_percentage':reserved_percentage,
     'available_list': available_list,
     'reserved_list': reserved_list,
     #'user_list': user_list
