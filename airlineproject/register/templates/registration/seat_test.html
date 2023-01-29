@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Seat test</title>
-</head>
-<body>
- {% for seat in seat_list %}
-    {{seat.seat_number}}
-  {% endfor %}
-</body>
-</html>
-
 {% extends 'registration/base.html' %}
 
 {% block content %}
@@ -21,8 +8,8 @@
     }
 
     .plane {
-      margin: 20px auto;
-      max-width: 300px;
+      margin: 30px auto;
+      max-width: 420px;
     }
 
     .exit {
@@ -54,29 +41,21 @@
     .fuselage {
       border-right: 10px solid #d8d8d8;
       border-left: 10px solid #d8d8d8;
+      font-size: 20px;
+      word-spacing: 10px;
+    }
+
+    .fuselage + input[type=hidden] {
+      border-right: 10px solid #d8d8d8;
+      border-left: 10px solid #d8d8d8;
+      font-size: 20px;
+      word-spacing: 20px;
     }
 
     ol {
       list-style: none;
       padding: 0;
       margin: 0;
-    }
-
-    .rowNumber{
-      display: block;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
-
-    .rowNumber label {
-      display: flex;
-      flex: 0 0 14.28571428571429%;
-      padding: 5px;
-      width:40px;
-      text-indent: 10px;
-      font-weight: bold;
-      color:rgb(120, 120, 120);
     }
 
     .seats {
@@ -98,13 +77,41 @@
       opacity: 0;
     }
 
+    /* aqui hacemos que se ponga la cruz cuando chequeas el asiento */
+
     .seat_number input[type=checkbox]:checked + label {
-      background: #F42536;
-      -webkit-animation-name: rubberBand;
-      animation-name: rubberBand;
-      animation-duration: 300ms;
-      animation-fill-mode: both;
+      background: #dddddd;
+      text-indent: -9999px;
+      overflow: hidden;
     }
+
+     .seat_number input[type=checkbox]:checked + label:after {
+      content: "X";
+      text-indent: 0;
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+
+/* tengo que arreglar este porque este deberia determinar que paarezca el popover pero no me funciona uwu */
+    /*.seat_number input[type=checkbox]:checked label:after + div {
+      position: absolute;
+      display: block;
+      z-index: 1;
+      width: 350%;
+      border: solid 1px teal;
+      border-radius: 5%;
+      padding: 10px;
+      background: white;
+      left: calc(1rem + 100%);
+      bottom: 50%;
+      transform: translateY(50%);
+    } */
+
+
+    /* esto hay que mantenerlo para que la siguiente vez el asiento checked este disabled y la siguiente
+    persona no pueda clickearlo, pero checked + label y disabled + label tienen los mismos settings */
 
     .seat_number input[type=checkbox]:disabled + label {
       background: #dddddd;
@@ -234,7 +241,7 @@
 
     /* popover*/
 
-    /* input+div {
+    input+div {
       display:none;
     }
     input[type=checkbox]:hover+div {
@@ -250,385 +257,249 @@
       bottom: 50%;
       transform: translateY(50%);
      }
+     */
 
-      input[type=checkbox]:checked{
-      background: #F42536;
-      -webkit-animation-name: rubberBand;
-      animation-name: rubberBand;
-      animation-duration: 300ms;
-      animation-fill-mode: both;
-     }
-    */
+     table, th, td {
+
+    }
+
+    table.center {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 20px;
+
+    }
 
     </style>
 <!-- ***** Style Ending ***** -->
-<!-- ***** Header and Seats Beginning ***** -->
-    <h1 class="text-success">Seat Reservation</h1>
-     </ul>
-    <h4>Please click on the seat (or seats) you would like to reserve.</h4>
+
+
+<form action="" method="get" class="form-horizontal form-groups-bordered" role="form">
+    {%csrf_token%}
+    <br class="form-group">
+    <label for="your_name">Which seat would you like to reserve? </label>
     </br>
+    </br>
+    <div class="row">
+        <div class="col-lg-8">
+        <input id="your_name" type="text" name="selected_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 4A">
+    <!-- The seat number entered gets stored as a value for the key 'your_seat' in a QueryDict (subclass of dict) -->
+    </div>
+    <div class="col-1 col-lg-offset-8">
+        <a class="btn btn-success btn-icon">
+        <input type="submit" class="btn btn-success btn-icon" value= "OK" onclick="return confirm('Are you sure of your selection?')" >
+        </a>
+    </div>
+</form>
+
+
+</br>
 <!-- **** Cabin Beginning **** -->
 
-     <div class="plane">
-      <div class="fuselage">
-      </div>
-      <ol class="cabin fuselage">
-      <li class="firstClass">
-        <li class="row row--1">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="1A"
-              <!-- primer if seria para hacer inmediatamente que sea disabled cuando seleccionamos, para saltar un paso y no tener que pensar  en que se ponga rojo el asiento -->
-              <!-- {% if checkbox == checked %} disabled {% else %} "" {% endif %} -->
-              {% if checkbox == checked %} seats.seat_flag {% else %} '' {% endif %} >
-              {% if checkbox == checked && id == seat.id %} seat.seat_flag {% else %} '' {% endif %}
-               <! -- <div>
-                 <p>Window Seat</p>
-                 <p>First Class</p>
-                 <p>Price:</p>
-               </div> -->
-              <label for="1A">A</label>
-            </li>
-            </details>
-            <li class="seat_number">
-              <input type="checkbox" id="1B" />
-              <div>
-                 <p>Middle Seat</p>
-                 <p>First Class</p>
-                 <p>Price:</p>
-               </div>
-              <label for="1B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="1C" />
-              <label for="1C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="1" />
-              <label for="1">1</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" disabled id="1D" /> <!-- THIS IS HOW WE MAKE IT FOR A SEAT TO BE OCCUPIED -->
-              <label for="1D">Occupied</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="1E" />
-              <label for="1E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="1F" />
-              <label for="1F">F</label>
-            </li>
-          </ol>
-        </li>
-        </li>
-        <li class="row row--2">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="2A" />
-              <label for="2A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="2B" />
-              <label for="2B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="2C" />
-              <label for="2C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="2" />
-              <label for="2">2</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="2D" />
-              <label for="2D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="2E" />
-              <label for="2E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="2F" />
-              <label for="2F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--3">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="3A" />
-              <label for="3A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="3B" />
-              <label for="3B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="3C" />
-              <label for="3C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="3" />
-              <label for="3">3</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="3D" />
-              <label for="3D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="3E" />
-              <label for="3E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="3F" />
-              <label for="3F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--4">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="4A" />
-              <label for="4A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="4B" />
-              <label for="4B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="4C" />
-              <label for="4C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="4" />
-              <label for="4">4</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="4D" />
-              <label for="4D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="4E" />
-              <label for="4E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="4F" />
-              <label for="4F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--5">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="5A" />
-              <label for="5A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="5B" />
-              <label for="5B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="5C" />
-              <label for="5C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="5" />
-              <label for="5">5</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="5D" />
-              <label for="5D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="5E" />
-              <label for="5E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="5F" />
-              <label for="5F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--6">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="6A" />
-              <label for="6A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="6B" />
-              <label for="6B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="6C" />
-              <label for="6C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="6" />
-              <label for="6">6</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="6D" />
-              <label for="6D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="6E" />
-              <label for="6E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="6F" />
-              <label for="6F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--7">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="7A" />
-              <label for="7A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="7B" />
-              <label for="7B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="7C" />
-              <label for="7C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="7" />
-              <label for="7">7</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="7D" />
-              <label for="7D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="7E" />
-              <label for="7E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="7F" />
-              <label for="7F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--8">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="8A" />
-              <label for="8A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="8B" />
-              <label for="8B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="8C" />
-              <label for="8C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="8" />
-              <label for="8">8</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="8D" />
-              <label for="8D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="8E" />
-              <label for="8E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="8F" />
-              <label for="8F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--9">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="9A" />
-              <label for="9A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="9B" />
-              <label for="9B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="9C" />
-              <label for="9C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="9" />
-              <label for="9">9</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="9D" />
-              <label for="9D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="9E" />
-              <label for="9E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="9F" />
-              <label for="9F">F</label>
-            </li>
-          </ol>
-        </li>
-        <li class="row row--10">
-          <ol class="seats" type="A">
-            <li class="seat_number">
-              <input type="checkbox" id="10A" />
-              <label for="10A">A</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="10B" />
-              <label for="10B">B</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="10C" />
-              <label for="10C">C</label>
-            </li>
-            <li class="rowNumber">
-              <input type="hidden" id="10" />
-              <label for="10">10</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="10D" />
-              <label for="10D">D</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="10E" />
-              <label for="10E">E</label>
-            </li>
-            <li class="seat_number">
-              <input type="checkbox" id="10F" />
-              <label for="10F">F</label>
-            </li>
-          </ol>
-        </li>
-      </ol>
-      <div class="fuselage">
-      </div>
+<!-- QUESTIONS:
+How to tidy the list, it begins with 10?
+How to add rows
+How to add the row number on the side or on the middle
+
+Must add that if the seat has been reserved it must be marked with an X -->
+<div>
+    </br>
+</div>
+
+<!-- si logro pasar un a count variable podria hacer usar un contador y cada vez que se llegue a count hacemos un break aka nueva row
+-->
+
+<div class="plane">
+    <div class="fuselage">
+        <ol class="cabin fuselage" >
+                {% for seat in seat_list %}
+
+                     <!-- This part adds the row number -->
+                    {%if seat.seat_number == "10A" %}
+                    <input type="hidden" value="10">
+                        <label for="{{seat.seat_number}}">10</label>
+                    {%elif seat.seat_number == "1A" %}
+                    <input type="hidden" value="1">
+                        <label for="{{seat.seat_number}}">1</label>
+                    {%elif seat.seat_number == "2A" %}
+                    <input type="hidden" value="2">
+                        <label for="{{seat.seat_number}}">2</label>
+                    {%elif seat.seat_number == "3A" %}
+                    <input type="hidden" value="3">
+                        <label for="{{seat.seat_number}}">3</label>
+                    {%elif seat.seat_number == "4A" %}
+                    <input type="hidden" value="4">
+                        <label for="{{seat.seat_number}}">4</label>
+                    {%elif seat.seat_number == "5A" %}
+                    <input type="hidden" value="5">
+                        <label for="{{seat.seat_number}}">5</label>
+                    {%elif seat.seat_number == "6A" %}
+                    <input type="hidden" value="6">
+                        <label for="{{seat.seat_number}}">6</label>
+                    {%elif seat.seat_number == "7A" %}
+                    <input type="hidden" value="7">
+                        <label for="{{seat.seat_number}}">7</label>
+                    {%elif seat.seat_number == "8A" %}
+                    <input type="hidden" value="8">
+                        <label for="{{seat.seat_number}}">8</label>
+                    {%elif seat.seat_number == "9A" %}
+                    <input type="hidden" value="9">
+                        <label for="{{seat.seat_number}}">9</label>
+                    {%endif%}
+                    <!-- End of rows -->
+                    <!-- <input type="checkbox" value="1" disabled> -->
+
+
+                    <!-- This is where we decide how to display the seats -->
+                    <input type="hidden" id="{{seat.seat_number}}" name="{{seat.seat_number}}"/>
+                    {% if seat.seat_number.1 == "0" %}
+                        {% if seat.seat_flag == "1" %}
+                            <label for="{{seat.seat_number}}">X</label>
+                            <!-- tengo que hacer que este disabled si esta en x -->
+                        {% else %}
+                            <label for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
+                        {%endif%}
+                    {% else %}
+                        {% if seat.seat_flag == "1" %}
+                            <label for="{{seat.seat_number}}">X</label>
+                            <!-- tengo que hacer que este disabled si esta en x -->
+                        {% else %}
+                            <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                        {%endif%}
+                    {%endif%}
+                    <!-- This is where we separate the seats in rows -->
+                    {% if seat.seat_number == "10F" or seat.seat_number == "1F" or seat.seat_number == "2F" or seat.seat_number == "3F" or seat.seat_number == "4F" or seat.seat_number == "5F" or seat.seat_number == "6F" or seat.seat_number == "7F" or seat.seat_number == "8F" or seat.seat_number == "9F"%}
+                        </br>
+                    {%endif%}
+                    <!-- End of separation by rows -->
+                {% endfor %}
+        </ol>
     </div>
-<!-- **** Cabin Ending **** -->
-<!-- ***** Header and Seats Ending ***** -->
-<!-- ***** Confirm Button Beginning **** -->
-  <br>
-  <h6 class = "text-center col-6 mx-auto text-secondary"> Please be sure of your selection before pressing the confirmation button. </h6>
-  <br>
-  <div class="d-grid gap-2 col-2 mx-auto"> <!--positions the "confirm" button in the center -->
-      <a href= {% url 'confirmed' %} type='button' class='btn btn-primary'>Confirm selection</a>
-      <!-- This redirects to the confirmed page once we have confirmed the selected seats -->
-      <!-- would be cool to add a popover that asks if i am ready to confirm when clicking on confirm -->
-    </div>
-  <br>
-  <br>
-<!-- ***** Confirm Button Ending ***** -->
-  </body>
+</div>
+
+
+<div>
+    </br>
+    </br>
+     </br>
+    </br>
+</div>
+
+
+
+<table class="center" style="width:20%">
+  <tr>
+      <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+  </tr>
+    <tr>
+    <td></td>
+    <td id="1A">A</td>
+    <td id="1B">B</td>
+    <td id="1C">C</td>
+    <td id="1D">D</td>
+    <td id="1F">F</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    {% if seat.seat_flag == 1 and seat.seat_number == 10A %} <!-- this is just me checking the if else, this should actually check if a seat.seat_number matches the selected_seat, then his should be the new display of seats -->
+        <td>X</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>F</td>
+    {% else  %}
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>F</td>
+  {% endif %}
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>4</td>
+    <td>A</td>
+        {% if seat.seat_flag == 1 and selected_seat == "4A" %}
+        <td>X</td>
+        {% endif %}
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>6</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>7</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+    <tr>
+    <td>8</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>9</td>
+    <td>A</td>
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+    <tr>
+    <td>10</td>
+    {% if seat.seat_flag == 1 %}
+        <td>X</td>
+    {% else %}
+    <td>A</td>
+    {% endif %}
+    <td>B</td>
+    <td>C</td>
+    <td>D</td>
+    <td>F</td>
+  </tr>
+</table>
 
 {% endblock %}
 <!-- <details data-popover="right">
@@ -640,12 +511,3 @@
             </details> -->
 
 
-{% for row in seat_number %}
-<div class="seat">
-<p>{{ row }}</p>
-</div>
-{% endfor %}
-
-{% for seat in seat_number %}
-  {{% seat.seat_flag %}}  this prints 3 because the seat is still available, 1 means its not available
-{% endfor %}
