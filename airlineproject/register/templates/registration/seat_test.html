@@ -277,7 +277,7 @@
 <form action="" method="get" class="form-horizontal form-groups-bordered" role="form">
     {%csrf_token%}
     <br class="form-group">
-    <label for="your_name">Which seat would you like to reserve? </label>
+    <label for="your_name">Type in the seat would you like to reserve </label>
     </br>
     </br>
     <div class="row">
@@ -287,7 +287,7 @@
     </div>
     <div class="col-1 col-lg-offset-8">
         <a class="btn btn-success btn-icon">
-        <input type="submit" class="btn btn-success btn-icon" value= "OK" onclick="return confirm('Are you sure of your selection?')" >
+        <input type="submit" class="btn btn-success" value= "OK" onclick="return confirm('Are you sure of your seat selection?')" >
         </a>
     </div>
 </form>
@@ -316,62 +316,36 @@ Must add that if the seat has been reserved it must be marked with an X -->
 
                      <!-- This part adds the row number -->
                     {%if seat.seat_number == "10A" %}
-                    <input type="hidden" value="10">
+                    <input type="hidden" value="{{seat.seat_number}}">
                         <label for="{{seat.seat_number}}">10</label>
-                    {%elif seat.seat_number == "1A" %}
-                    <input type="hidden" value="1">
-                        <label for="{{seat.seat_number}}">1</label>
-                    {%elif seat.seat_number == "2A" %}
-                    <input type="hidden" value="2">
-                        <label for="{{seat.seat_number}}">2</label>
-                    {%elif seat.seat_number == "3A" %}
-                    <input type="hidden" value="3">
-                        <label for="{{seat.seat_number}}">3</label>
-                    {%elif seat.seat_number == "4A" %}
-                    <input type="hidden" value="4">
-                        <label for="{{seat.seat_number}}">4</label>
-                    {%elif seat.seat_number == "5A" %}
-                    <input type="hidden" value="5">
-                        <label for="{{seat.seat_number}}">5</label>
-                    {%elif seat.seat_number == "6A" %}
-                    <input type="hidden" value="6">
-                        <label for="{{seat.seat_number}}">6</label>
-                    {%elif seat.seat_number == "7A" %}
-                    <input type="hidden" value="7">
-                        <label for="{{seat.seat_number}}">7</label>
-                    {%elif seat.seat_number == "8A" %}
-                    <input type="hidden" value="8">
-                        <label for="{{seat.seat_number}}">8</label>
-                    {%elif seat.seat_number == "9A" %}
-                    <input type="hidden" value="9">
-                        <label for="{{seat.seat_number}}">9</label>
+                    {% else %}
+                    <input type="hidden" value="{{seat.seat_number}}">
+                        <label for="{{seat.seat_number}}">{{seat.seat_number}}</label> <!-- change to seat.seat_number.1 for iris' database with 01A -->
                     {%endif%}
                     <!-- End of rows -->
-                    <!-- <input type="checkbox" value="1" disabled> -->
-
 
                     <!-- This is where we decide how to display the seats -->
                     <input type="hidden" id="{{seat.seat_number}}" name="{{seat.seat_number}}"/>
                     {% if seat.seat_number.1 == "0" %}
                         {% if seat.seat_flag == "1" %}
                             <label for="{{seat.seat_number}}">X</label>
-                            <!-- tengo que hacer que este disabled si esta en x -->
                         {% else %}
                             <label for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
                         {%endif%}
                     {% else %}
                         {% if seat.seat_flag == "1" %}
                             <label for="{{seat.seat_number}}">X</label>
-                            <!-- tengo que hacer que este disabled si esta en x -->
                         {% else %}
-                            <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                            <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label> <!-- change to seat.seat_number.2 for iris -->
                         {%endif%}
                     {%endif%}
+
                     <!-- This is where we separate the seats in rows -->
                     {% if seat.seat_number == "10F" or seat.seat_number == "1F" or seat.seat_number == "2F" or seat.seat_number == "3F" or seat.seat_number == "4F" or seat.seat_number == "5F" or seat.seat_number == "6F" or seat.seat_number == "7F" or seat.seat_number == "8F" or seat.seat_number == "9F"%}
                         </br>
                     {%endif%}
                     <!-- End of separation by rows -->
+
                 {% endfor %}
         </ol>
     </div>
