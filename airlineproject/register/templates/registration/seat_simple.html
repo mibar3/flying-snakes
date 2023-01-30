@@ -3,39 +3,10 @@
 {% block content %}
 <!-- ***** Style Beginning ***** -->
     <style>
-        *, *:before, *:after {
-      box-sizing: border-box;
-    }
 
     .plane {
       margin: 30px auto;
-      max-width: 420px;
-    }
-
-    .exit {
-      position: relative;
-      height: 50px;
-    }
-
-    .exit:before, .exit:after {
-      content: "EXIT";
-      font-size: 14px;
-      line-height: 18px;
-      padding: 0px 2px;
-      font-family: "Arial Narrow", Arial, sans-serif;
-      display: block;
-      position: absolute;
-      background: green;
-      color: white;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
-    .exit:before {
-      left: 0;
-    }
-
-    .exit:after {
-      right: 0;
+      max-width: 500px;
     }
 
     .fuselage {
@@ -50,28 +21,14 @@
       padding: 0;
       margin: 0;
 
-     table, th, td {
-
-    }
-
-    table.center {
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 15px;
-
-    }
-
     p {
         font-size: 16px;
         line-height: 24px;
         line-break: normal;
     }
 
-    @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css');
 
-    .container {
-        margin: 40px;
-    }
+
 
     </style>
 <!-- ***** Style Ending ***** -->
@@ -108,12 +65,12 @@ How to tidy the list, it begins with 10? -->
         <ol class="cabin fuselage" >
                 {% for seat in seat_list %}
                      <!-- This part adds the row number -->
-                    {%if seat.seat_number.2 == "A" %}
+                    {%if seat.seat_number.0 == "1" %}
                     <input type="hidden" value="10">
                         <label for="{{seat.seat_number}}">10</label>
-                    {%elif seat.seat_number.1 == "A" %}
-                    <input type="hidden" value="1">
-                        <label for="{{seat.seat_number}}">{{seat.seat_number.0}}</label>
+                    {%elif seat.seat_number.2 == "A" %}
+                    <input type="hidden" value="{{seat.seat_number}}">
+                        <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
                     {%endif%}
                     <!-- End of rows -->
 
@@ -122,7 +79,7 @@ How to tidy the list, it begins with 10? -->
                     <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
                            autocomplete="off" data-mdb-toggle="popover" />
 
-                    {% if seat.seat_number.1 == "0" %}
+                    {% if seat.seat_number.0 == "1" %}
 
                         {% if seat.seat_flag == "1" %}
                             <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
@@ -141,144 +98,27 @@ How to tidy the list, it begins with 10? -->
                             <label class="btn btn-secondary" for="{{seat.seat_number}}">X</label>
 
                         {% else %}
-                            <a data-toggle="popover" title="CLASS : {{seat.seat_class}};  LOCATION : {{seat.seat_location}}">
-                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                            <a data-toggle="popover" title="CLASS : {{seat.seat_class}}  LOCATION : {{seat.seat_location}}">
+                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
                              </a>
                             {%endif%}
 
                     {%endif%}
                     <!-- This is where we separate the seats in rows -->
-                    {% if seat.seat_number == "10F" or seat.seat_number == "1F" or seat.seat_number == "2F" or seat.seat_number == "3F" or seat.seat_number == "4F" or seat.seat_number == "5F" or seat.seat_number == "6F" or seat.seat_number == "7F" or seat.seat_number == "8F" or seat.seat_number == "9F"%}
+                    {% if seat.seat_number == "10F" or seat.seat_number == "01F" or seat.seat_number == "02F" or seat.seat_number == "03F" or seat.seat_number == "04F" or seat.seat_number == "05F" or seat.seat_number == "06F" or seat.seat_number == "07F" or seat.seat_number == "08F" or seat.seat_number == "09F"%}
                         <p></p> <!-- spacing between the rows -->
                     {%endif%}
                     <!-- End of separation by rows -->
+
+                    <!-- Here we add the aisle between seats -->
+                    {% if seat.seat_number.2 == "C" %}
+                        <input type="hidden"/>
+                            <label><span style="color:white">Aisle</span></label>
+                    {%endif%}
+                    <!-- End of
                 {% endfor %}
         </ol>
     </div>
 </div>
-
-
-<div>
-    </br>
-    </br>
-     </br>
-    </br>
-</div>
-
-
-<table class="center" style="width:20%">
-  <tr>
-      <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-  </tr>
-    <tr>
-    <td></td>
-    <td id="1A">A</td>
-    <td id="1B">B</td>
-    <td id="1C">C</td>
-    <td id="1D">D</td>
-    <td id="1F">F</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    {% if seat.seat_flag == 1 and seat.seat_number == 10A %} <!-- this is just me checking the if else, this should actually check if a seat.seat_number matches the selected_seat, then his should be the new display of seats -->
-        <td>X</td>
-        <td>B</td>
-        <td>C</td>
-        <td>D</td>
-        <td>F</td>
-    {% else  %}
-        <td>A</td>
-        <td>B</td>
-        <td>C</td>
-        <td>D</td>
-        <td>F</td>
-  {% endif %}
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>3</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>4</td>
-    <td>A</td>
-        {% if seat.seat_flag == 1 and selected_seat == "4A" %}
-        <td>X</td>
-        {% endif %}
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>5</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>6</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>7</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-    <tr>
-    <td>8</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>9</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-    <tr>
-    <td>10</td>
-    {% if seat.seat_flag == 1 %}
-        <td>X</td>
-    {% else %}
-    <td>A</td>
-    {% endif %}
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>F</td>
-  </tr>
-</table>
-
 
 {% endblock %}
