@@ -191,8 +191,8 @@ def statistics(request):
 
     #Percentage of taken and available Seats
 
-    available_percentage = (available_count/seat_count) * 100
-    reserved_percentage = (reserved_count/seat_count) * 100
+    available_percentage = round((available_count/seat_count) * 100)
+    reserved_percentage = round((reserved_count/seat_count) * 100)
 
     #Listing taken and available Seats
 
