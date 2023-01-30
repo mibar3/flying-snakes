@@ -65,12 +65,12 @@ How to tidy the list, it begins with 10? -->
         <ol class="cabin fuselage" >
                 {% for seat in seat_list %}
                      <!-- This part adds the row number -->
-                    {%if seat.seat_number == "10A" %}
+                    {%if seat.seat_number.0 == "1" %}
                     <input type="hidden" value="10">
                         <label for="{{seat.seat_number}}">10</label>
-                    {%elif seat.seat_number.1 == "A" %}
-                    <input type="hidden" value="1">
-                        <label for="{{seat.seat_number}}">{{seat.seat_number.0}}</label>
+                    {%elif seat.seat_number.2 == "A" %}
+                    <input type="hidden" value="{{seat.seat_number}}">
+                        <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
                     {%endif%}
                     <!-- End of rows -->
 
@@ -79,7 +79,7 @@ How to tidy the list, it begins with 10? -->
                     <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
                            autocomplete="off" data-mdb-toggle="popover" />
 
-                    {% if seat.seat_number.1 == "0" %}
+                    {% if seat.seat_number.0 == "1" %}
 
                         {% if seat.seat_flag == "1" %}
                             <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
@@ -99,19 +99,19 @@ How to tidy the list, it begins with 10? -->
 
                         {% else %}
                             <a data-toggle="popover" title="CLASS : {{seat.seat_class}}  LOCATION : {{seat.seat_location}}">
-                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
                              </a>
                             {%endif%}
 
                     {%endif%}
                     <!-- This is where we separate the seats in rows -->
-                    {% if seat.seat_number == "10F" or seat.seat_number == "1F" or seat.seat_number == "2F" or seat.seat_number == "3F" or seat.seat_number == "4F" or seat.seat_number == "5F" or seat.seat_number == "6F" or seat.seat_number == "7F" or seat.seat_number == "8F" or seat.seat_number == "9F"%}
+                    {% if seat.seat_number == "10F" or seat.seat_number == "01F" or seat.seat_number == "02F" or seat.seat_number == "03F" or seat.seat_number == "04F" or seat.seat_number == "05F" or seat.seat_number == "06F" or seat.seat_number == "07F" or seat.seat_number == "08F" or seat.seat_number == "09F"%}
                         <p></p> <!-- spacing between the rows -->
                     {%endif%}
                     <!-- End of separation by rows -->
 
                     <!-- Here we add the aisle between seats -->
-                    {% if seat.seat_number.1 == "C" or seat.seat_number.2 == "C" %}
+                    {% if seat.seat_number.2 == "C" %}
                         <input type="hidden"/>
                             <label><span style="color:white">Aisle</span></label>
                     {%endif%}
