@@ -157,20 +157,6 @@ def seat_view(request):
     # print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
 
     return render(request, 'registration/seat_view.html', {'seat_list': newseat_list})
-def confirmed_view(request):
-    # send a seat confirmation email)
-    # the variables used come from the registration function
-    # have to figure out how to import the variables from registration function
-
-    # https://www.youtube.com/watch?v=xNqnHmXIuzU
-    '''send_mail(
-        'Account confirmation' + first_name + last_name,  # subject
-        'Thank you for signing up to our airline reservation system!',  # message
-        [miri.cbe @ gmail.com],  # from email
-        email,  # To Email
-    ) '''
-
-    return render(request, 'registration/confirmed.html')
 
 def base(request):
     return render(request, 'registration/base.html')
@@ -290,9 +276,11 @@ def seat_simple(request):
 
                 if seat.seat_flag == '3':
                     seat.seat_flag = '1';
-                    seat.save() # this saves the change in the database but when i input
-                    # the seat again after changing its flag the website crashes
+                    seat.save() # This saves the change in the database but when i input
+                    # The seat again after changing its flag the website crashes
                     print("The new flag for this seat is: ", seat.seat_flag)
+                    messages.info(request, 'Thank you! The seat you have selected has been succesfully reserved.')
+                    return redirect('/seat_simple')
 
                 elif seat.seat_flag == '1':
                     ''' seat.seat_flag = '3'; # to reset any seat that has been reserved after testing
