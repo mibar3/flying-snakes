@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
 
 # Create your views here.
 from .models import AirlineSeat
-from .models import Passenger
 
 def index_view(request):
     return render(request, 'registration/index.html')
@@ -187,11 +186,13 @@ def statistics(request):
 
     #Counting the Users
 
-    #user_count = Passenger.objects.all().count
+    #user_count = Users.objects.all().count
+
+    count_users = User.objects.values().count
 
     #Listing User and their information
 
-    #user_list = Passenger.objects.all()
+    all_users = User.objects.values()
 
     return render(request, 'registration/statistics.html',
     {'seat_count': seat_count,
@@ -201,7 +202,8 @@ def statistics(request):
     'reserved_percentage':reserved_percentage,
     'available_list': available_list,
     'reserved_list': reserved_list,
-    #'user_list': user_list
+    'count_users': count_users,
+    'all_users': all_users,
     })
 
 def seat_simple(request):

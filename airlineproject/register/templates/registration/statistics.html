@@ -68,26 +68,28 @@
 <div class="card">
     <div class="card-header">How many passengers are registrated?</div>
     <div class="card-body">
-        <p class="card-text">Passengers: <!--{user_count}--></p>
+        <p class="card-text">Passengers: {{count_users}}</p>
     </div>
 </div>
 <!--Counting Users Ending-->
 </br>
 <!--Listing the User Information Beginning-->
-{% for Passenger in user_list %}
+{% for user in all_users %}
 <div class="card">
-<div class="card-header">{{Passenger}}</div>
+<div class="card-header">{{user.username}}</div>
     <div class="card-body">
         <p class="card-text">
         <ul>
-            <li>Name:<!--{{Passenger.passsenger_name}}--></li>
-            <li>Age:<!--{{Passenger.passsenger_age}}--></li>
-            <li>Phone:<!--{{Passenger.passsenger_phone}}--></li>
-
+            <li>Username: {{user.username}}</li>
+            <li>Name: {{user.first_name}} {{user.last_name}}</li>
+            <li>Email: {{user.email}}</li>
         </ul>
         </p>
     </div>
+
 </div>
+<br/>
 {% endfor %}
+
 {% endblock %}
 
