@@ -36,7 +36,7 @@
             <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b> How does the reservation of my seat works?</b></summary>
             <div style="padding:1rem 1rem 1px 1rem">
                 <p>To choose and reserve your favorite seat on the plane you have to sign up or log in first.<br/>
-                    Afterwards you will be automatically transferred to the reservation tool. Here you can choose your seat. Your selected Seat is marked in a different color. Seats with a X are already taken. Don't forget to confirm your choice at the end with the confirm button.</p>
+                    Afterwards you will be automatically transferred to the reservation tool or you click <a href={% url "seat_simple" %}>here</a>. Here you can reserve your seat by typing in the seat you want into the input bar. After you pressed the 'OK' button you will be asked again to confirm your choice. A message will pop up confirming your seat reservation.</p>
             </div>
         </details>
         <p>
@@ -45,8 +45,8 @@
         <details style=" ackground: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;" >
             <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b> What happens after I confirmed my seats?</b></summary>
             <div style="padding:1rem 1rem 1px 1rem">
-                <p>As soon as you confirmed your Seat choice, you will be transferred to the confirmed page. Like this you know, that your reservation worked. <br/>
-                Please check now your Email, to get a copy of the reservation.</p>
+                <p>As soon as you confirmed your Seat choice, a message will pop up showing your seat is reserved. Also you will see that your seat is now grey and has a 'X' on it.<br/>
+                </p>
             </div>
         </details>
         <p>
@@ -66,11 +66,22 @@
             <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b>How can I cancel my seats?</b></summary>
             <div style="padding:1rem 1rem 1px 1rem">
                 <p>To cancel your seats, please send us an <a href="mailto:flyingsnakesairline@service.com">Email</a>. We are going to cancel your reservation for you. <br/>
+                    The admin can cancel seat reservations at the 'Seat_Cancellation' page by typing in the seat and confirm.
                 </p>
+            </div>
+        </details>
+         <p>
+
+        </p>
+        <details style=" ackground: #f8f8f8; border: 3px inset #f8f8f8; border-radius:5px;" >
+            <summary style ="padding: 1rem; background:#e2e2e2; color:#000; cursor: pointer;"><b>For Admin:</b></summary>
+            <div style="padding:1rem 1rem 1px 1rem">
+                <p>the admin has special access to the systems statistics. They can be found at the navbar under statistics or <a href={% url "statistics" %}>here</a>. The statistics shows the number of available and taken seats and their percentage. Also they list the seats by taken or available. From this page you can also see information about the Users and how many there are. <p>
             </div>
         </details>
 <!-- ***** Questions Ending ***** -->
 
     </main>
+<br/>
 
   {% endblock %}
