@@ -1,18 +1,5 @@
 from django.db import models
 from django.urls import reverse
-
-
-class Passenger(models.Model):
-    passenger_name = models.CharField(max_length=50, help_text="Enter your name")
-    passenger_age = models.IntegerField(help_text="Enter your age")
-    passenger_phone = models.IntegerField(help_text="Enter your phone number")
-    passenger_dob = models.DateField()
-
-    def __str__(self):
-        """String for representing the MyModelName object (in Admin site etc.)."""
-        return self.passenger_name
-
-
 class AirlineSeat(models.Model):
     """A typical class defining a model, derived from the Model class."""
 
@@ -32,6 +19,11 @@ class AirlineSeat(models.Model):
         GREEN = '2', 'SELECTED'
         GREY = '3', 'AVAILABLE'
 
+    class SeatPrices(models.TextChoices):
+        PRICE1 = '1', '50'
+        PRICE2 = '2', '25'
+        PRICE3 = '3', '10'
+
     # Fields
     seat_number = models.CharField(max_length=20, help_text='Enter seat number')
     seat_class = models.CharField(
@@ -50,11 +42,11 @@ class AirlineSeat(models.Model):
         choices=SeatFlags.choices,
         default=SeatFlags.GREY)
 
-    ''' seat_row = models.CharField(
-        max_length=5,
-        choices=SeatRow.choices,
-        default=SeatRow.ONE) '''
-
+    seat_price = models.CharField(
+        max_length=15,
+        choices=SeatPrices.choices,
+        default=SeatPrices.PRICE3
+    )
 
     # Metadata
     class Meta:

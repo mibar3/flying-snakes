@@ -67,32 +67,32 @@ def dashboard_view(request):
         for l in ls:
             # splitting the seats line by line
             data = l.split()
-            #print("data:", data)
+            # print("data:", data)
             for i in data[1:]:
                 count = int(data[0])
-                #print('count', count)
-                #print('i', i)
+                # print('count', count)
+                # print('i', i)
                 # Create an empty instance of your model
                 obj = AirlineSeat()
                 if count <= 3:
                     seatno = '0' + str(count) + i
                     if i == 'A' or i == 'F':
-
                         obj.seat_number = seatno
                         obj.seat_class = '1'
                         obj.seat_location = '1'
+                        obj.seat_price = '1'
                         obj.save()
                     elif i == 'B' or i == 'E':
-
                         obj.seat_number = seatno
                         obj.seat_class = '1'
                         obj.seat_location = '2'
+                        obj.seat_price = '1'
                         obj.save()
                     else:
-
                         obj.seat_number = seatno
                         obj.seat_class = '1'
                         obj.seat_location = '3'
+                        obj.seat_price = '1'
                         obj.save()
                 if 3 < count <= 6:
                     seatno = '0' + str(count) + i
@@ -100,16 +100,19 @@ def dashboard_view(request):
                         obj.seat_number = seatno
                         obj.seat_class = '2'
                         obj.seat_location = '1'
+                        obj.seat_price = '2'
                         obj.save()
                     elif i == 'B' or i == 'E':
                         obj.seat_number = seatno
                         obj.seat_class = '2'
                         obj.seat_location = '2'
+                        obj.seat_price = '2'
                         obj.save()
                     else:
                         obj.seat_number = seatno
                         obj.seat_class = '2'
                         obj.seat_location = '3'
+                        obj.seat_price = '2'
                         obj.save()
                 if 6 < count <= 9:
                     seatno = '0' + str(count) + i
@@ -117,16 +120,19 @@ def dashboard_view(request):
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '1'
+                        obj.seat_price = '3'
                         obj.save()
                     elif i == 'B' or i == 'E':
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '2'
+                        obj.seat_price = '3'
                         obj.save()
                     else:
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '3'
+                        obj.seat_price = '3'
                         obj.save()
                 if count > 9:
                     seatno = str(count) + i
@@ -134,39 +140,49 @@ def dashboard_view(request):
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '1'
+                        obj.seat_price = '3'
                         obj.save()
                     elif i == 'B' or i == 'E':
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '2'
+                        obj.seat_price = '3'
                         obj.save()
                     else:
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '3'
+                        obj.seat_price = '3'
                         obj.save()
+
     # print("I am here")
+    user_file_path = os.path.join(module_dir, 'userfile.txt')
+    with open(user_file_path, 'r') as f:
+        ls = f.readlines()
+        for l in ls:
+            # splitting the seats line by line
+            data = l.split()
+            #print(data)
+            # print("data:", data)
+            if data[5] == '0':
+                user = User.objects.create_user(username=data[3], password=data[4], email=data[2],
+                                                first_name=data[0], last_name=data[1], is_superuser=True)
+                user.set_password(data[4])  # passing the password to the POST function
+                user.save()
+                print('success')
+            else:
+                user = User.objects.create_user(username=data[3], password=data[4], email=data[2],
+                                                first_name=data[0], last_name=data[1])
+                user.set_password(data[4])  # passing the password to the POST function
+                user.save()
+                print('success')
 
     return render(request, 'registration/dashboard.html')
-
-
-def seat_view(request):
-    seat_list = AirlineSeat.objects.all()
-    # Sort in ascending order
-    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
-    # print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
-
-    return render(request, 'registration/seat_view.html', {'seat_list': newseat_list})
-
 def base(request):
     return render(request, 'registration/base.html')
 
 def help(request):
     return render(request,'registration/help.html')
-
-def seat_test(request):
-    seat_list = AirlineSeat.objects.all()
-    return render(request, 'registration/seat_test.html', {'seat_list': seat_list})
 
 def statistics(request):
     #Counting taken and available Seats
@@ -215,11 +231,9 @@ def seat_simple(request):
     newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
     # print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
 
-
-
     if request.method == "GET":
         count = 0
-        selected_seat = request.GET.get("selected_seat")
+        selected_seat = request.GET.get("selected_seat") # The users input gets saved into a string
 
         for seat in newseat_list:
             count+=1
@@ -250,10 +264,14 @@ def seat_simple(request):
                 print("no match")
 
     print(count)
-    ''' No funciona manda miles de requests ! 
-    if count  == 60:
-        messages.info(request, 'Please enter a valid seat number.')
-        return redirect('/seat_simple') '''
+
+
+
+
+
+
+
+
 
 
 
@@ -265,27 +283,5 @@ def seat_simple(request):
 
     return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
 
-def seat_iris(request):
-    seat_list = AirlineSeat.objects.all()
-    # sort in ascending order
-    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
-    return render(request, 'registration/seat_iris.html', {'seat_list': newseat_list})
 
-'''def seat_selection(request):
-    seat_list = AirlineSeat.objects.all()
-    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
-    if request.method=='POST':
-        seat_selected = request.POST['seat_selected']
-        if seat_selected in newseat_list:
-            newseat_list'''
 
-def testing(request):
-    input = request.GET  # We save what has been inputed in the page into a variable
-    person_name = input.get('your_name')  # This is how we access the value entered for the key 'your_seat'
-    print('Your name is:', person_name)
-
-    # Since we are working with a QueryDict, this is how we access the keys
-    keys = input.keys()
-    print("These are the keys stored in the QueryDict: ", keys)
-
-    return render(request, 'registration/testing.html')
