@@ -12,7 +12,7 @@ admin.site.register(Passenger, PassengerAdmin)
 
 
 class AirlineSeatAdmin(admin.ModelAdmin):
-    list_display = ('seat_number', 'seat_class', 'seat_location', 'seat_flag')
+    list_display = ('seat_number', 'seat_class', 'seat_location', 'seat_flag','seat_price')
 
 
 admin.site.register(AirlineSeat, AirlineSeatAdmin)

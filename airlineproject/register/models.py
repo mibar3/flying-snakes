@@ -32,6 +32,10 @@ class AirlineSeat(models.Model):
         GREEN = '2', 'SELECTED'
         GREY = '3', 'AVAILABLE'
 
+    class SeatPrices(models.TextChoices):
+        PRICE1 = '1', '50'
+        PRICE2 = '2', '25'
+        PRICE3 = '3', '10'
 
     # Fields
     seat_number = models.CharField(max_length=20, help_text='Enter seat number')
@@ -49,6 +53,8 @@ class AirlineSeat(models.Model):
     seat_flag = models.CharField(max_length=15,
                                  choices=SeatFlags.choices,
                                  default=SeatFlags.GREY)
+
+    seat_price = models.CharField(max_length=15, choices=SeatPrices.choices, default=SeatPrices.PRICE3)
 
     # Metadata
     class Meta:

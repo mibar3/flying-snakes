@@ -28,17 +28,37 @@ for JS stuff for example a script src= ... file
           <ul class="navbar-nav mr-auto">
 
             <a class="nav-link active" aria-current="page" href={% url "home" %}>Home</a>
-            <a class="nav-link" href={% url "login" %}>Login</a>
-            <a class="nav-link" href={% url "register" %}>Sign up</a>
-            <a class="nav-link" href={% url "login" %}>Logout</a>
-            <a class="nav-link" href={% url "statistics" %}>Statistics</a> <!--must change: only superuser can see-->
-             <!-- must change the link to logout here, logout page doesnt exist yet -->
+          {% if user.is_authenticated %}
+          {% if user.is_superuser %}
+            <li class="nav-item">
+               <a class="nav-link" href={% url "statistics" %}>Statistics</a>
+               <a class="nav-link" href={% url "seat_cancellation" %}>Seat_Cancellation</a>
+            </li>
+          {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href={% url "seat_simple" %}>Seats</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={% url "logout" %}?next={% url "home"%}>Logout</a>
+            </li>
+
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href={% url "login" %}>Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={% url "register" %}>Sign up</a>
+            </li>
+
+          {% endif %}
           </ul>
+
           <ul class="navbar-nav mr-auto">
               <li class="nav-item">
                   <a class="nav-link" href={% url "help" %}>Help</a>
               </li>
           </ul>
+
         </div>
       </div>
     </nav>
@@ -46,8 +66,16 @@ for JS stuff for example a script src= ... file
 
   <!-- ****** Content Area Beginning ***** -->
     </br> <!-- creates a space between the navbar and the rest of the content -->
-    <div class = "container"> <!-- positions all of the text further to the right -->
+    <div class = "container">
+      {% if messages %}<!-- positions all of the text further to the right -->
+        {% for message in messages %}
 
+      <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" style="height:20px" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        {{ message }}
+      </div>
+        {% endfor %}
+      {% endif %}
     {% block content %}
 
       <!-- THIS IS WHERE EACH PAGE OF OUR APP WILL GET PULLED AND OUTPUTED -->

@@ -1,19 +1,27 @@
-
-{% extends 'index.html' %}
+{% extends 'registration/base.html' %}
 
 {% block content %}
 
-{% load crispy_forms_tags %}
+  <h1 class="text-center text-success">Welcome back!</h1>
+  <p class="text-center text-success">Please, login with your username and password.</p>
+<br/><br/>
 
-<!--Login-->
-<div class="container py-5">
-  <h1>Login</h1>
-  <form method="POST">
+  <form action="" method=POST>
     {% csrf_token %}
-    {{ login_form|crispy }}
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
-  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
-</div>
+    <form>
+      <div class="mb-3">
+        <label for="InputEmail1" class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+      </div>
+
+      <div class="mb-3">
+        <label for="InputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password">
+      </div>
+
+      <div class="mb-3">
+        <button type="submit" class="btn btn-success btn-lg">Login</button>
+      </div>
+    </form>
 
 {% endblock %}

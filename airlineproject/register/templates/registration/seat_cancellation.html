@@ -1,0 +1,124 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<!-- ***** Style Beginning ***** -->
+    <style>
+
+    .plane {
+      margin: 30px auto;
+      max-width: 500px;
+    }
+
+    .fuselage {
+      border-right: 10px solid #FFFFFF;
+      border-left: 10px solid #FFFFFF;
+      font-size: 20px;
+      word-spacing: 15px;
+    }
+
+    ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+    p {
+        font-size: 16px;
+        line-height: 24px;
+        line-break: normal;
+    }
+
+
+
+
+    </style>
+<!-- ***** Style Ending ***** -->
+
+<form action="" method="get" class="form-horizontal form-groups-bordered" role="form">
+    {%csrf_token%}
+    <br class="form-group">
+    <label for="your_name">Which seat would you like to reserve? </label>
+    </br>
+    </br>
+    <div class="row">
+        <div class="col-lg-8">
+        <input id="your_name" type="text" name="selected_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 4A">
+    <!-- The seat number entered gets stored as a value for the key 'your_seat' in a QueryDict (subclass of dict) -->
+    </div>
+    <div class="col-1 col-lg-offset-8">
+        <a class="btn btn-success btn-icon">
+        <input type="submit" class="btn btn-success btn-icon" value= "OK" onclick="return confirm('Are you sure of your selection?')" >
+        </a>
+    </div>
+</form>
+
+
+</br>
+<!-- **** Cabin Beginning **** -->
+
+<!-- QUESTIONS:
+How to tidy the list, it begins with 10? -->
+
+{%for seat in seat_list%}{{seat.seat_number}}{%endfor%}
+
+<div class="plane">
+    <div class="fuselage">
+        <ol class="cabin fuselage" >
+                {% for seat in seat_list %}
+                     <!-- This part adds the row number -->
+                    {%if seat.seat_number.0 == "1" %}
+                    <input type="hidden" value="10">
+                        <label for="{{seat.seat_number}}">10</label>
+                    {%elif seat.seat_number.2 == "A" %}
+                    <input type="hidden" value="{{seat.seat_number}}">
+                        <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                    {%endif%}
+                    <!-- End of rows -->
+
+                    <!-- This is where we decide how to display the seats -->
+                    <a data-toggle="popover" title="CLASS : {{seat.seat_class}}  LOCATION : {{seat.seat_location}}">
+                    <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
+                           autocomplete="off" data-mdb-toggle="popover" />
+
+                    {% if seat.seat_number.0 == "1" %}
+
+                        {% if seat.seat_flag == "1" %}
+                            <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
+                           id="{{seat.seat_number}}" checked autocomplete="off" disabled/>
+                            <label class="btn btn-secondary" for="{{seat.seat_number}}">X</label>
+
+                        {% else %}
+                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
+                        {%endif%}
+
+                    {% else %}
+
+                        {% if seat.seat_flag == "1" %}
+                            <input type="checkbox" id="{{seat.seat_number}}" name="{{seat.seat_number}}" class="btn-check"
+                           id="{{seat.seat_number}}" autocomplete="off" disabled/>
+                            <label class="btn btn-secondary" for="{{seat.seat_number}}">X</label>
+
+                        {% else %}
+                            <a data-toggle="popover" title="CLASS : {{seat.seat_class}}  LOCATION : {{seat.seat_location}}">
+                            <label class="btn btn-success" for="{{seat.seat_number}}">{{seat.seat_number.2}}</label>
+                             </a>
+                            {%endif%}
+
+                    {%endif%}
+                    <!-- This is where we separate the seats in rows -->
+                    {% if seat.seat_number == "10F" or seat.seat_number == "01F" or seat.seat_number == "02F" or seat.seat_number == "03F" or seat.seat_number == "04F" or seat.seat_number == "05F" or seat.seat_number == "06F" or seat.seat_number == "07F" or seat.seat_number == "08F" or seat.seat_number == "09F"%}
+                        <p></p> <!-- spacing between the rows -->
+                    {%endif%}
+                    <!-- End of separation by rows -->
+
+                    <!-- Here we add the aisle between seats -->
+                    {% if seat.seat_number.2 == "C" %}
+                        <input type="hidden"/>
+                            <label><span style="color:white">Aisle</span></label>
+                    {%endif%}
+                    <!-- End of
+                {% endfor %}
+        </ol>
+    </div>
+</div>
+
+{% endblock %}
