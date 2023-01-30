@@ -146,7 +146,7 @@ def dashboard_view(request):
                         obj.seat_number = seatno
                         obj.seat_class = '3'
                         obj.seat_location = '2'
-                        obj.seat_price = '3'
+                        #obj.seat_price = '3'
                         obj.save()
                     else:
                         obj.seat_number = seatno
