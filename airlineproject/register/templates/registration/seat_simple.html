@@ -32,16 +32,15 @@
 
     </style>
 <!-- ***** Style Ending ***** -->
-
+<!-- ***** Header and Seats Beginning ***** -->
+    <h1 class="text-success">Seat Reservation</h1>
+    </br>
+    <h5>Which seat would you like to reserve?</h5>
 <form action="" method="get" class="form-horizontal form-groups-bordered" role="form">
     {%csrf_token%}
-    <br class="form-group">
-    <label for="your_name">Which seat would you like to reserve? </label>
-    </br>
-    </br>
     <div class="row">
         <div class="col-lg-8">
-        <input id="your_name" type="text" name="selected_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 4A">
+        <input id="your_name" type="text" name="selected_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 04A">
     <!-- The seat number entered gets stored as a value for the key 'your_seat' in a QueryDict (subclass of dict) -->
     </div>
     <div class="col-1 col-lg-offset-8">
@@ -58,19 +57,17 @@
 <!-- QUESTIONS:
 How to tidy the list, it begins with 10? -->
 
-{%for seat in seat_list%}{{seat.seat_number}}{%endfor%}
-
 <div class="plane">
     <div class="fuselage">
         <ol class="cabin fuselage" >
                 {% for seat in seat_list %}
                      <!-- This part adds the row number -->
-                    {%if seat.seat_number.0 == "1" %}
+                    {%if seat.seat_number == "10A" %}
                     <input type="hidden" value="10">
                         <label for="{{seat.seat_number}}">10</label>
                     {%elif seat.seat_number.2 == "A" %}
                     <input type="hidden" value="{{seat.seat_number}}">
-                        <label for="{{seat.seat_number}}">{{seat.seat_number.1}}</label>
+                        <label for="{{seat.seat_number}}">{{seat.seat_number.0}}{{seat.seat_number.1}}</label>
                     {%endif%}
                     <!-- End of rows -->
 
