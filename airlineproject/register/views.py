@@ -221,6 +221,51 @@ def statistics(request):
     'all_users': all_users,
     })
 
+def statistics_text(request):
+    response = HttpResponse(content_type='text/plaibn')
+    response['Content-Disposition'] = 'attachment; filename=statistics.txt'
+
+    seat_count = AirlineSeat.objects.all().count()
+
+    available_count = AirlineSeat.objects.filter(seat_flag=3).count()
+    reserved_count = AirlineSeat.objects.filter(seat_flag=1).count()
+
+    available_percentage = round((available_count / seat_count) * 100)
+    reserved_percentage = round((reserved_count / seat_count) * 100)
+
+    available_list = AirlineSeat.objects.filter(seat_flag=3)
+    reserved_list = AirlineSeat.objects.filter(seat_flag=1)
+
+    count_users = User.objects.values().count()
+    all_users = User.objects.values()
+
+    available_seat_list_text=[]
+    taken_seat_list_text=[]
+    user_info_text=[]
+
+    lines = ['Number of Seats:\n'
+             'available Seats:', available_count,'(',available_percentage,'%)\n',
+             'taken Seats:', reserved_count,'(', reserved_percentage,'%)\n',
+             'List of Seats:\n'
+             'available Seats:', available_seat_list_text, '\n'
+             'taken Seats:', taken_seat_list_text, '\n'                                            
+             'User Information:\n',
+             'Number of Users:', count_users, '\n',
+             'User:', user_info_text, '\n',
+             ]
+
+    for seat in available_list:
+        available_seat_list_text.append({seat.seat_number})
+    for seat in reserved_list:
+        taken_seat_list_text.append({seat.seat_number})
+    for user in all_users:
+        user_info_text += (user['username'],user['first_name'],user['last_name'],user['email'])
+
+
+    response.writelines(lines)
+    return response
+
+
 def seat_simple(request):
 
     # still have to figure out how to pass the selected_seat to the html to include in the if

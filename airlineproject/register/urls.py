@@ -19,4 +19,5 @@ urlpatterns = [
     path('seat_simple', views.seat_simple, name='seat_simple'),
     path('seat_iris', views.seat_iris, name='seat_iris'),
     path('testing', views.testing, name='testing'),
+    path('statistics_text', views.statistics_text, name='statistics_text'),
 ]
