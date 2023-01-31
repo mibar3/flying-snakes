@@ -2,26 +2,42 @@
 
 ### Theint Hay Thi Maung
 ***
-## Requirement
-Pycharm, PgAdmin4
+### Miranda Barros
+- created the
+
+## Requirements
+Pycharm, PgAdmin4, PostgreSQL, Django, html, sql, psycopg2, pip, django-crispy-forms
 
 # How to setup?
 Set up in Pycharm
-1.Create a project with virtual environemt in Pycahrm.
+1.Create a project with virtual environemt in Pycharm.
 2.Packages need to be installed: Django, html, sql, psycopg2, pip, django-crispy-forms
 
-Set up in PgAdmin4
-1. Create database under the main server
-2. Change the database name and password in setting.py file 'DATABASES'
+Create a database to import the data
+1. Open up the SQL Shell after having downloaded PostgreSQL. 
+2. Use all the default settings (pressing ENTER each time) until you reach the password, for this type in as password "007700". This
+is the password that our project uses so that it can sync the data to the database.
+3. Name the database, ideally use the name "postgres".
 
-# How to run?
-
-In terminal,
-
-cd project_file
-python manage.py makemigrations
-python manage.py migrate
+Open up PgAdmin:
+1. Enter PgAdmin password 
+2. Click on Servers and you will be asked for your PostgreSQL password, use the same password you entered in the SQL Shell: '007700'
+3. Click on Databases, so far, an empty database should show up.
+4. Now we must run the app, so we can run the dashboard and import the data.
+5. Within the repository, type in the terminal:
+cd flying-snakes
+cd airlineproject
 python manage.py runserver
+
+6. Open up the webapp by clicking the localhost direction highlited in blue:http://127.0.0.1:8000/
+7.  To run the dashboard, add in the url after the "http://127.0.0.1:8000/dashboard"
+8. Then run in the terminal:
+ 
+python manage.py makemigrations register
+python manage.py migrate
+
+10.  Now open up PgAdmin and go to Servers > PostgreSQL > postgres > Schemas > public > Tables > register_airlineseat, click on register_airlineseat and then on the "View Data" button next to the Query tool at the top of the page. This should display all the data. 
+11.  If this doesnt work and no data shows up, please try migrating first and then running the dashboard.
 
 # Importing seat data and some data from text file
 
@@ -29,6 +45,10 @@ run /dashboard and it will import all the data for seat display from input_seat.
                    5 user with 1 admin permission from userfile.txt
               
 in home, user can register their data. 
+
+In case the dashboard page gets run more than once, the data will double. If this happens, simply go to the register_airlineseat table in PGAdmin, press the Query
+tool symbol at the top of the page, and in the box called "Query" type in this command "TRUNCATE TABLE register_airlineseat RESTART IDENTITY;"and then press the play button. This will clean the database and then, if you run the dashboard again, the data should be imported into the database again.
+
 
 # Code explained
 
@@ -59,3 +79,5 @@ All the seats are created as objects. The seats are sorted in ascending order in
  This function is simply asked the inputs from user as a form. If the username is existed in the database it will redirect to the same page and asked the data from user again. If no, then this user will create in database and redirect the user to home page. 
  
  ***
+ 
+ 
