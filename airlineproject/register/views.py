@@ -288,12 +288,13 @@ def seat_simple(request):
     if request.method == "GET":
         count = 0
         selected_seat = request.GET.get("selected_seat") # The users input gets saved into a string
+        selected_seat_with_zero_in_front = "0"+str(selected_seat) # Add a zero before the input to match the database
 
         for seat in newseat_list:
             count+=1
-            if selected_seat == seat.seat_number:
-                print("The seat that has been selected is:", selected_seat)
-                print(seat, selected_seat)  # To check the entered seat matches the database seat
+            if selected_seat_with_zero_in_front == seat.seat_number:
+                print("The seat that has been selected is:", selected_seat_with_zero_in_front)
+                print(seat, selected_seat_with_zero_in_front)  # To check the entered seat matches the database seat
                 print("It's a match!")
                 print("The current flag of", seat.seat_number, "is", seat.seat_flag)
 
@@ -314,21 +315,10 @@ def seat_simple(request):
                 break
 
             else:
-                print(seat, selected_seat)
+                print(seat, selected_seat_with_zero_in_front)
                 print("no match")
 
     print(count)
-
-
-
-
-
-
-
-
-
-
-
 
     ''' Less optimal alternative to access the inputed seat from the user  
         seat_input = request.GET  # We save what has been inputed in the page into a variable
@@ -345,24 +335,29 @@ def seat_iris(request):
     # print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
 
     if request.method == "GET":
-        count = 0
         selected_seat = request.GET.get("selected_seat")
+        selected_seat_with_zero_in_front = "0"+str(selected_seat) # Add a zero before the input to match the database
 
         for seat in newseat_list:
-            count += 1
-            if selected_seat == seat.seat_number:
+            if selected_seat_with_zero_in_front == seat.seat_number:
 
                 if seat.seat_flag == '1':
                     seat.seat_flag = '3';
                     seat.save()  # this saves the change in the database but when i input
                     # the seat again after changing its flag the website crashes
-                    print("The seat is available again ", seat.seat_flag)
+                    print("The seat is available again:", seat.seat_flag)
+                    messages.info(request, 'This seat has become available again.')
+                    return redirect('/seat_cancellation')
+                elif seat.seat_flag == '3':
+                    print("The seat is already available: ", seat.seat_flag)
+                    messages.info(request, 'This seat is already available.')
+                    return redirect('/seat_cancellation')
 
             else:
-                print(seat, selected_seat)
+                print(seat, selected_seat_with_zero_in_front)
                 print("no match")
 
-    return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
+    return render(request, 'registration/seat_cancellation.html', {'seat_list': newseat_list})
 
 
 

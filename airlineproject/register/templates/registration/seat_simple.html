@@ -26,12 +26,9 @@
         line-height: 24px;
         line-break: normal;
     }
-
-
-
-
     </style>
 <!-- ***** Style Ending ***** -->
+
 <!-- ***** Header and Seats Beginning ***** -->
     <h1 class="text-success">Seat Reservation</h1>
     </br>
@@ -40,7 +37,7 @@
     {%csrf_token%}
     <div class="row">
         <div class="col-lg-8">
-        <input id="your_name" type="text" name="selected_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 04A">
+        <input id="your_name" type="text" name="selected_seat" class="form-control" type="CharField" data-validate="required" placeholder="Example: 4A">
     <!-- The seat number entered gets stored as a value for the key 'your_seat' in a QueryDict (subclass of dict) -->
     </div>
     <div class="col-1 col-lg-offset-8">
@@ -53,9 +50,6 @@
 
 </br>
 <!-- **** Cabin Beginning **** -->
-
-<!-- QUESTIONS:
-How to tidy the list, it begins with 10? -->
 
 <div class="plane">
     <div class="fuselage">
