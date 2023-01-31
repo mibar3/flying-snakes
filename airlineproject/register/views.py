@@ -5,10 +5,11 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import os
+from django.contrib.auth.decorators import permission_required, login_required
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
-from django.contrib.auth.decorators import permission_required
+
 
 # Create your views here.
 from .models import AirlineSeat
@@ -41,7 +42,7 @@ def register_view(request):
         return render(request, 'registration/form.html')
 
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -60,6 +61,7 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'You have been successfully logged out!')
     return redirect('home')
+
 
 def logout_help(request):
     return render(request, "registration/logout_help.html")
@@ -196,7 +198,7 @@ def base(request):
 def help(request):
     return render(request,'registration/help.html')
 
-# @permission_required('is_superuser')
+@permission_required('is.superuser')
 def statistics(request):
     #Counting taken and available Seats
     seat_count = AirlineSeat.objects.all().count()
@@ -236,6 +238,7 @@ def statistics(request):
     'all_users': all_users,
     })
 
+@permission_required('is.superuser')
 def statistics_text(request):
     response = HttpResponse(content_type='text/plaibn')
     response['Content-Disposition'] = 'attachment; filename=statistics.txt'
@@ -281,6 +284,7 @@ def statistics_text(request):
     return response
 
 
+@login_required()
 def seats(request):
     seat_list = AirlineSeat.objects.all()
     # Sort in ascending order
@@ -332,6 +336,7 @@ def seats(request):
 
     return render(request, 'registration/seats.html', {'seat_list': newseat_list})
 
+@permission_required('is.superuser')
 def seat_cancellation(request):
     # still have to figure out how to pass the selected_seat to the html to include in the if
     seat_list = AirlineSeat.objects.all()
