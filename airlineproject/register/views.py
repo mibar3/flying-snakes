@@ -39,7 +39,7 @@ def register_view(request):
         return render(request, 'registration/form.html')
 
 
-def login_user(request):
+def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
