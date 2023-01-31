@@ -328,5 +328,32 @@ def seat_simple(request):
 
     return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
 
+def seat_iris(request):
+    # still have to figure out how to pass the selected_seat to the html to include in the if
+    seat_list = AirlineSeat.objects.all()
+    # Sort in ascending order
+    newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
+    # print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
+
+    if request.method == "GET":
+        count = 0
+        selected_seat = request.GET.get("selected_seat")
+
+        for seat in newseat_list:
+            count += 1
+            if selected_seat == seat.seat_number:
+
+                if seat.seat_flag == '1':
+                    seat.seat_flag = '3';
+                    seat.save()  # this saves the change in the database but when i input
+                    # the seat again after changing its flag the website crashes
+                    print("The seat is available again ", seat.seat_flag)
+
+            else:
+                print(seat, selected_seat)
+                print("no match")
+
+    return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
+
 
 
