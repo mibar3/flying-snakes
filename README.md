@@ -1,6 +1,6 @@
 # pdsw22_group_01
 
-### Theint Hay Thi Maung
+
 ***
 ### Miranda Barros
 - created the github repository, setup the folders and assigned collaborators
@@ -14,6 +14,16 @@
 - statistics text file (in the views.py)
 - navbar ( only authenticate users/ superuser can see it different links in the navabr)
 - only if you loged in you can access special pages like seats,etc/only if you superuser you can access special pages)
+
+***
+### Theint Hay Thi Maung
+-research for all the setup thing with django and PgAdmin
+-handle data importing and deleteing into the database
+-create model
+-dashboard function(for importing the seats data and default users into database) and html
+-registration function and html
+
+
 ## Requirements
 Pycharm, PgAdmin4, PostgreSQL, Django, html, sql, psycopg2, pip, django-crispy-forms
 
