@@ -3,11 +3,15 @@
 ### Theint Hay Thi Maung
 ***
 ### Miranda Barros
-- created the github repository, setup the folders and assigned collaborators
-- created the seat.html, seat function in views, seat_cancellation.html, seat_cancellation in views with Theints help,base.html file, 
-- added all the extensions to the .html files from the base.html file
-- created all test files, 
-
+- created the
+***
+### Sarah Tiebes
+- login (the views.py function and html page)
+- logout (the views.py logout and logout_help and logout_help html file)
+- statistics (the views.py function and the html file)
+- statistics text file (in the views.py)
+- navbar ( only authenticate users/ superuser can see it different links in the navabr)
+- only if you loged in you can access special pages like seats,etc/only if you superuser you can access special pages)
 ## Requirements
 Pycharm, PgAdmin4, PostgreSQL, Django, html, sql, psycopg2, pip, django-crispy-forms
 
