@@ -19,7 +19,7 @@
 ### Theint Hay Thi Maung
 - research for all the setup thing with django and PgAdmin
 - handle data importing and deleteing into the database
-- create model for creating tables in database
+- create models and objects for airline seats and connect with database for creating tables 
 - dashboard function(for importing the seats data and default users into database) and html
 - registration function and html
 
