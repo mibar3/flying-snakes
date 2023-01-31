@@ -3,7 +3,10 @@
 ### Theint Hay Thi Maung
 ***
 ### Miranda Barros
-- created the
+- created the github repository, setup the folders and assigned collaborators
+- created the seat.html, seat function in views, seat_cancellation.html, seat_cancellation in views with Theints help,base.html file, 
+- added all the extensions to the .html files from the base.html file
+- created all test files, 
 
 ## Requirements
 Pycharm, PgAdmin4, PostgreSQL, Django, html, sql, psycopg2, pip, django-crispy-forms
