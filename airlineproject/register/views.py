@@ -50,7 +50,7 @@ def login_user(request):
             messages.info(request, 'Upsi: Your username or password is wrong.')
             return redirect('login')
     else:
-        return render(request, "registration/login_test.html")
+        return render(request, "registration/login.html")
 
 
 def logout_user(request):
