@@ -2,10 +2,10 @@
 
 Theint Hay Thi Maung
 
-#Requirement
+# Requirement
 Pycharm, PgAdmin4
 
-#How to setup?
+# How to setup?
 Set up in Pycharm
 1.Create a project with virtual environemt in Pycahrm.
 2.Packages need to be installed: Django, html, sql, psycopg2, pip, django-crispy-forms
@@ -14,7 +14,7 @@ Set up in PgAdmin4
 1. Create database under the main server
 2. Change the database name and password in setting.py file 'DATABASES'
 
-#How to run?
+# How to run?
 In terminal,
 In thhe project file, type
 python manage.py makemigrations
