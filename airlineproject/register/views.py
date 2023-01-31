@@ -288,12 +288,23 @@ def seats(request):
     # print(type(newseat_list[0])) #<class 'register.models.AirlineSeat'>
 
     if request.method == "GET":
-        count = 0
         selected_seat = request.GET.get("selected_seat") # The users input gets saved into a string
         selected_seat_with_zero_in_front = "0"+str(selected_seat) # Add a zero before the input to match the database
+        count = 0
 
         for seat in newseat_list:
-            if selected_seat_with_zero_in_front == seat.seat_number:
+            if selected_seat_with_zero_in_front == "0None":
+                break
+
+            if len(selected_seat_with_zero_in_front) > 4:
+                messages.info(request, 'Please enter a valid seat.')
+                return redirect('/seats')
+
+            if selected_seat_with_zero_in_front.isdigit():
+                messages.info(request, 'Please enter a valid seat.')
+                return redirect('/seats')
+
+            elif selected_seat_with_zero_in_front == seat.seat_number:
                 print("The seat that has been selected is:", selected_seat_with_zero_in_front)
                 print(seat, selected_seat_with_zero_in_front)  # To check the entered seat matches the database seat
                 print("It's a match!")
@@ -304,7 +315,7 @@ def seats(request):
                     seat.save() # This saves the change in the database but when i input
                     # The seat again after changing its flag the website crashes
                     print("The new flag for this seat is: ", seat.seat_flag)
-                    messages.info(request, 'Thank you! The seat you have selected has been succesfully reserved.')
+                    messages.info(request, 'Thank you! The seat you have selected has been successfully reserved.')
                     return redirect('/seats')
 
                 elif seat.seat_flag == '1':
@@ -317,13 +328,7 @@ def seats(request):
             else:
                 print(seat, selected_seat_with_zero_in_front)
                 print("no match")
-                count += 1
-                print(count) # checking count works
-
-                '''if count == 60:
-                    print("Invalid input")
-                    messages.info(request, 'Please enter a valid seat.')
-                    return redirect('/seats')'''
+                count+=1
 
     return render(request, 'registration/seats.html', {'seat_list': newseat_list})
 

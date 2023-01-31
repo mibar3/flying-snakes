@@ -1,0 +1,1 @@
+Pycharm==community versionDjango==4.1.1PyYAML==5.4.1Asgief==3.6.0Crispy-forms-bootstrap2==2022.1Django-crispy-forms==1.14.0Django-filter==22.1Html==1.13Html-index==1.0.9Msqlparse==0.4.4Pip==21.1.1Psycopg2==2.9.5Steuptools==56.0.0Sqlparse==0.4.3
