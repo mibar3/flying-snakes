@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 from register.views import index_view, login_user, register_view, dashboard_view, logout_user, base, help, \
-    statistics, seat_simple, statistics_text
+    statistics, seats, statistics_text
 
 # python manage.py test register to run the tests
 # or python manage.py test register.tests to run the tests
@@ -18,10 +18,10 @@ class TestUrls(SimpleTestCase):
         print(resolve(url)) # Use resolve function to parse url and see which view django is going to call
         self.assertEquals(resolve(url).func, index_view) # Making sure that the resolve url is equal to index_view
 
-    '''def test_login_url_resolves(self):
+    def test_login_url_resolves(self):
         url = reverse('login')
         print(resolve(url))
-        self.assertEquals(resolve(url).func, login_user)'''
+        self.assertEquals(resolve(url).func, login)
 
     def test_register_url_resolves(self):
         url = reverse('register')
@@ -52,10 +52,10 @@ class TestUrls(SimpleTestCase):
         print(resolve(url))
         self.assertEquals(resolve(url).func, statistics)
 
-    def test_seat_simple_url_resolves(self):
-        url = reverse('seat_simple')
+    def test_seats_url_resolves(self):
+        url = reverse('seats')
         print(resolve(url))
-        self.assertEquals(resolve(url).func, seat_simple)
+        self.assertEquals(resolve(url).func, seats)
 
     def test_statistics_text_url_resolves(self):
         url = reverse('statistics_text')

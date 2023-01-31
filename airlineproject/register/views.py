@@ -46,7 +46,7 @@ def login_user(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('seat_simple')
+            return redirect('seats')
         else:
             messages.info(request, 'Upsi: Your username or password is wrong.')
             return redirect('login')
@@ -277,9 +277,7 @@ def statistics_text(request):
     return response
 
 
-def seat_simple(request):
-
-    # still have to figure out how to pass the selected_seat to the html to include in the if
+def seats(request):
     seat_list = AirlineSeat.objects.all()
     # Sort in ascending order
     newseat_list = list(sorted(seat_list, key=lambda obj: obj.seat_number))
@@ -291,7 +289,6 @@ def seat_simple(request):
         selected_seat_with_zero_in_front = "0"+str(selected_seat) # Add a zero before the input to match the database
 
         for seat in newseat_list:
-            count+=1
             if selected_seat_with_zero_in_front == seat.seat_number:
                 print("The seat that has been selected is:", selected_seat_with_zero_in_front)
                 print(seat, selected_seat_with_zero_in_front)  # To check the entered seat matches the database seat
@@ -304,30 +301,29 @@ def seat_simple(request):
                     # The seat again after changing its flag the website crashes
                     print("The new flag for this seat is: ", seat.seat_flag)
                     messages.info(request, 'Thank you! The seat you have selected has been succesfully reserved.')
-                    return redirect('/seat_simple')
+                    return redirect('/seats')
 
                 elif seat.seat_flag == '1':
                     ''' seat.seat_flag = '3'; # to reset any seat that has been reserved after testing
                     seat.save() '''
                     print("This seat is already taken")
                     messages.info(request, 'This seat has already been reserved. Please choose another seat.')
-                    return redirect('/seat_simple')
-                break
+                    return redirect('/seats')
 
             else:
                 print(seat, selected_seat_with_zero_in_front)
                 print("no match")
+                count += 1
+                print(count) # checking count works
 
-    print(count)
+                '''if count == 60:
+                    print("Invalid input")
+                    messages.info(request, 'Please enter a valid seat.')
+                    return redirect('/seats')'''
 
-    ''' Less optimal alternative to access the inputed seat from the user  
-        seat_input = request.GET  # We save what has been inputed in the page into a variable
-        reserved_seat = seat_input.get('selected_seat')  # This is how we access the value entered for the key 'your_seat'
-        print('Your reserved seat is:', reserved_seat) '''
+    return render(request, 'registration/seats.html', {'seat_list': newseat_list})
 
-    return render(request, 'registration/seat_simple.html', {'seat_list': newseat_list})
-
-def seat_iris(request):
+def seat_cancellation(request):
     # still have to figure out how to pass the selected_seat to the html to include in the if
     seat_list = AirlineSeat.objects.all()
     # Sort in ascending order

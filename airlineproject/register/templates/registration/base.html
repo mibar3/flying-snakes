@@ -41,7 +41,7 @@ for JS stuff for example a script src= ... file
             </li>
           {% endif %}
             <li class="nav-item">
-              <a class="nav-link" href={% url "seat_simple" %}>Seat Reservation</a>
+              <a class="nav-link" href={% url "seats" %}>Seat Reservation</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href={% url "logout" %}?next={% url "home"%}>Logout</a>
@@ -49,7 +49,7 @@ for JS stuff for example a script src= ... file
 
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href={% url "login" %}?next={% url "seat_simple"%}>Login</a>
+              <a class="nav-link" href={% url "login" %}?next={% url "seats"%}>Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href={% url "register" %}>Sign up</a>
