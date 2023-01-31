@@ -6,6 +6,7 @@ import os
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
 from .models import AirlineSeat
