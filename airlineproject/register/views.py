@@ -191,7 +191,7 @@ def base(request):
 def help(request):
     return render(request,'registration/help.html')
 
-@permission_required('is_superuser')
+# @permission_required('is_superuser')
 def statistics(request):
     #Counting taken and available Seats
     seat_count = AirlineSeat.objects.all().count()
