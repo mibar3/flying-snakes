@@ -16,4 +16,5 @@ urlpatterns = [
     path('seat_simple', views.seat_simple, name='seat_simple'),
     path('statistics_text', views.statistics_text, name='statistics_text'),
     path('seat_cancellation', views.seat_iris, name='seat_cancellation'),
+    path('logout_help', views.logout_help, name='logout_help')
 ]

@@ -1,0 +1,54 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+function startTimer(duration, display) {
+    var timer = duration, seconds;
+    setInterval(function () {
+        seconds = parseInt(timer % 60, 5);
+
+        seconds = seconds < 5 ? "0" + seconds : seconds;
+
+        display.textContent = seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var fiveSecs = 5,
+        display = document.querySelector('#time');
+    startTimer(fiveSecs, display);
+        setTimeout(function () {
+        window.location.href = '/'
+        },
+        5000);
+};
+
+bye = function () {
+Swal.fire({
+            title: "Thank you for visiting Flying Snakes Reservation System",
+            html: "<div> You will be logged out and redirected to home in 5 seconds!</div>",
+            icon: "success",
+            allowOutsideClick: false,
+            showConfirmButton:false
+        });
+};
+bye();
+
+
+
+
+
+</script>
+
+<br>
+
+
+{% endblock %}

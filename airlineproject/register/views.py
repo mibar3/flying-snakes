@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
@@ -59,6 +61,8 @@ def logout_user(request):
     messages.success(request, 'You have been successfully logged out!')
     return redirect('home')
 
+def logout_help(request):
+    return render(request, "registration/logout_help.html")
 
 def dashboard_view(request):
     module_dir = os.path.dirname(__file__)
