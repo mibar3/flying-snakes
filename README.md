@@ -17,11 +17,11 @@
 
 ***
 ### Theint Hay Thi Maung
--research for all the setup thing with django and PgAdmin
--handle data importing and deleteing into the database
--create model
--dashboard function(for importing the seats data and default users into database) and html
--registration function and html
+- research for all the setup thing with django and PgAdmin
+- handle data importing and deleteing into the database
+- create model
+- dashboard function(for importing the seats data and default users into database) and html
+- registration function and html
 
 
 ## Requirements
