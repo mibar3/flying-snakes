@@ -1,5 +1,7 @@
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.webdriver.common.keys import Keys
+from django.test import LiveServerTestCase
 from django.urls import reverse
 import time
 from register.views import index_view, login, dashboard_view, base, help, statistics, seats, statistics_text
@@ -14,6 +16,9 @@ class Test_page(StaticLiveServerTestCase):
 
         def tearDown(self):
             self.browser.close()
+
+
+        def
 
         '''def test_is_displayed(self):
             self.browser.get(self.live_server_url)
@@ -38,7 +43,7 @@ class Test_page(StaticLiveServerTestCase):
                 self.browser.current_url,
                 add_url
             ) '''
-        def test_user_inputs_seat(self):
+        '''def test_user_inputs_seat(self):
             self.browser.get(self.live_server_url)
 
             # The user sees the homepage
@@ -46,6 +51,10 @@ class Test_page(StaticLiveServerTestCase):
                 self.browser.find_element_by_class_name('text-center text-success')
             self.assertEquals(alert.find_element_by_tag_name('div').text, 'Welcome to the Flying Snakes Seat Reservation System!')
 
+        
 
+        def test_is_displayed(self):
+            self.browser.get(self.live_server_url)
+            time.sleep(60)
 
-
+'''
