@@ -22,3 +22,4 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/login_user.html')
 
+    # def test_login_POST_no_data(self):
