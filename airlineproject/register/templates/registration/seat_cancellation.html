@@ -62,7 +62,7 @@
                         <label for="{{seat.seat_number}}">10</label>
                     {%elif seat.seat_number.2 == "A" %}
                     <input type="hidden" value="{{seat.seat_number}}">
-                        <label for="{{seat.seat_number}}">{{seat.seat_number.0}}{{seat.seat_number.1}}</label>
+                        <label for="{{seat.seat_number}}"><span style="color:white">{{seat.seat_number.0}}</span>{{seat.seat_number.1}}</label>
                     {%endif%}
                     <!-- End of rows -->
 
