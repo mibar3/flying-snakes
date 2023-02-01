@@ -25,49 +25,70 @@
 
 
 ## Requirements
-Pycharm, PgAdmin4, PostgreSQL, Django, html, sql, psycopg2, pip, django-crispy-forms
+Pycharm, PgAdmin4, PostgreSQL, Django, html, sql, psycopg2, pip, django-crispy-forms, virtualenv
 
 # How to setup?
-Set up in Pycharm
+## Set up in Pycharm
 1.Create a project with virtual environemt in Pycharm.
 2.Packages need to be installed: Django, html, sql, psycopg2, pip, django-crispy-forms
+3.Clone our repository using the following command:
 
-Create a database to import the data
+- git clone https://github.com/mibar3/flying-snakes.git
+
+## Create a database to import the data
 1. Open up the SQL Shell after having downloaded PostgreSQL. 
 2. Use all the default settings (pressing ENTER each time) until you reach the password, for this type in as password "007700". This
 is the password that our project uses so that it can sync the data to the database.
-3. Name the database, ideally use the name "postgres".
+3. Name the database with the name "postgres".
 
-Open up PgAdmin:
-1. Enter PgAdmin password 
-2. Click on Servers and you will be asked for your PostgreSQL password, use the same password you entered in the SQL Shell: '007700'
-3. Click on Databases, so far, an empty database should show up.
-4. Now we must run the app, so we can run the dashboard and import the data.
-5. Within the repository, type in the terminal:
+## Open up PgAdmin:
+1. Enter your PgAdmin password 
+2. Click on Servers and you will be asked for your PostgreSQL password, use the same password you entered in the SQL Shell: "007700"
+3. Click on Databases, so far, an empty database called "postgres" should show up.
+4. In order to avoid a specific error when trying the run the database, within Pycharm you must go to the cloned repository flying-snakes > airlineproject > airlineproject > settings.py and scroll down until you reach the following section:
+
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'postgres',
+       'USER': 'postgres',
+       'PASSWORD': 'Pstgrs926alfaj0r!',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
+}
+
+Here, you must replace the PASSWORD with '007700'.
+
+6. Now we must run the app, so we can run the dashboard and import the data for seat display from input_seat.txt file and 5 users with 1 admin permission from userfile.txt. 
+7. Within the repository, if you aren't already in within the right directory type in the terminal:
+
 cd flying-snakes
 cd airlineproject
 python manage.py runserver
 
-6. Open up the webapp by clicking the localhost direction highlited in blue:http://127.0.0.1:8000/
-7.  To run the dashboard, add in the url after the "http://127.0.0.1:8000/dashboard"
+6. Open up the webapp by clicking the localhost direction highlited in blue: http://127.0.0.1:8000/
+7.  To run the dashboard(only once), by adding /dashboard to the current url or copying and pasting: http://127.0.0.1:8000/dashboard
 8. Then run in the terminal:
  
-python manage.py makemigrations register
-python manage.py migrate
+- python manage.py makemigrations register
+- python manage.py migrate
 
-10.  Now open up PgAdmin and go to Servers > PostgreSQL > postgres > Schemas > public > Tables > register_airlineseat, click on register_airlineseat and then on the "View Data" button next to the Query tool at the top of the page. This should display all the data. 
-11.  If this doesnt work and no data shows up, please try migrating first and then running the dashboard.
+10.  Now open up PgAdmin and go to Servers > PostgreSQL > postgres > Schemas > public > Tables > register_airlineseat, click on register_airlineseat and then on the "View Data" squared button next to the Query tool at the top of the page. This should display all the imported data. 
+11.  If this doesnt work and no data shows up, please try migrating first and then running the dashboard afterwards.
 
-# Importing seat data and some data from text file
-
-run /dashboard and it will import all the data for seat display from input_seat.txt file and
-                   5 user with 1 admin permission from userfile.txt
-              
-in home, user can register their data. 
+### If you ran the dashboard more than once
 
 In case the dashboard page gets run more than once, the data will double. If this happens, simply go to the register_airlineseat table in PGAdmin, press the Query
-tool symbol at the top of the page, and in the box called "Query" type in this command "TRUNCATE TABLE register_airlineseat RESTART IDENTITY;"and then press the play button. This will clean the database and then, if you run the dashboard again, the data should be imported into the database again.
+tool symbol at the top of the page, and in the box called "Query" type in this command: 
 
+"TRUNCATE TABLE register_airlineseat RESTART IDENTITY;"
+
+Then press the "play" button. This will clean the database and then, if you run the dashboard again, the data should be imported into the database again.
+
+# Testing the webpage
+
+1. By opening up the userfile.txt in Pycharm (flying-snakes > airlineproject > airlineproject > register ) you can access the user information and test login in by entering one of the usernames and according password (Ex: "Sarah" "sara444"). There is one assigned admin, Iris, if you input her username and password you will be able to access other atributes in the page such as Seat Cancellation, Statistics, etc.
 
 # Code explained
 
